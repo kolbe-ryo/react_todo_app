@@ -1,0 +1,35 @@
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+  
+  .card:hover {
+    transform: scale(1.03);
+  }
+  
+  h3 {
+    margin: 0;
+    font-size: 1.2em;
+  }
+  
+  p {
+    color: #555;
+  }
+  
+  button {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    float: right;
+  }
+  
+  button:hover {
+    color: #e74c3c;
+  }
+  
