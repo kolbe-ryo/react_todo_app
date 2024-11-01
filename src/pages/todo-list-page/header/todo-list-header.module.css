@@ -1,5 +1,11 @@
 
-/* todo-list-headerのヘッダー部分のタイトルを修飾するためのスタイル */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 0;
+}
+
 .title {
     font-weight: bold;
     margin-bottom: 16px;

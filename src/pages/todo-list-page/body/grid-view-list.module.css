@@ -1,7 +1,7 @@
 .gridView {
     display: grid;
     gap: 16px;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     /* padding: 16px; */
 }
 
@@ -10,7 +10,7 @@
     border-radius: 8px;
     padding: 16px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
 }
 
