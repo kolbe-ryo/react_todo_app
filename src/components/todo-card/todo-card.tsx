@@ -1,10 +1,11 @@
 import React from "react";
 import styles from "./todo-card.module.css";
+import { Todo } from "../../model/todo";
 
 type TodoCardProps = {
-  todo: { id: number; title: string; description: string };
+  todo: Todo;
   onDelete: (id: number) => void;
-  onEdit: (todo: { id: number; title: string; description: string }) => void;
+  onEdit: (todo: Todo) => void;
 };
 
 const TodoCard: React.FC<TodoCardProps> = ({ todo, onDelete, onEdit }) => {
