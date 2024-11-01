@@ -4,6 +4,8 @@
   flex-direction: column;
   align-items: center;
   padding: 32px 0;
+  position: relative;
+  /* background-color: #888; */
 }
 
 .title {
@@ -18,4 +20,15 @@
 .subtitle {
   font-size: 16px;
   color: #888;
+}
+
+/* 親要素の右上に配置 */
+
+.logout {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  color: #888;
+  cursor: pointer;
+  font-size: 40px;
 }
