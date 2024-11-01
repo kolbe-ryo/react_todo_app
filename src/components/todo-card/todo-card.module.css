@@ -7,15 +7,18 @@
     transition: transform 0.2s;
     cursor: pointer;
     position: relative;
+    background-color: white;
   }
   
   .card:hover {
     transform: scale(1.01);
+    background-color: rgb(255, 243, 229);
   }
   
   h3 {
     margin: 0;
     font-size: 1.2em;
+    color: orange;
   }
   
   p {
@@ -40,10 +43,10 @@
     border: none;
     color: #888;
     cursor: pointer;
-    /* float: right; */
     position: absolute;
     top: 15px;
     right: 15px;
+    font-size: 20px;
   }
   
   .deleteBin:hover {

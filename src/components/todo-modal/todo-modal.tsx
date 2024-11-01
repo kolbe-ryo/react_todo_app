@@ -1,29 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./todo-modal.module.css";
+import { Todo } from "../../model/todo";
+import { formatDateToYYYYMMDDHHMM } from "../../utils/time-format";
+import { IoCloseSharp } from "react-icons/io5";
+import { RxUpdate } from "react-icons/rx";
 
 type ModalProps = {
   isOpen: boolean;
-  todo: { id: number; title: string; description: string } | null;
+  todo: Todo | null;
   onClose: () => void;
-  onSave: (updatedTodo: { id: number; title: string; description: string }) => void;
-  onDelete: (id: number) => void;
+  onUpdate: (updatedTodo: Todo) => void;
 };
 
-const Modal: React.FC<ModalProps> = ({ isOpen, todo, onClose, onSave, onDelete }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, todo, onClose, onUpdate }) => {
+
+  const [updatedTodo, setUpdatedTodo] = useState<Todo | null>(todo);
+
   if (!isOpen || !todo) return null;
 
-  const handleSave = () => {
-    onSave({ ...todo });
-    onClose();
-  };
+  console.log(todo);
+  console.log(updatedTodo);
+
+  const createdAt = formatDateToYYYYMMDDHHMM(todo.createdAt);
 
   return (
-    <div className={styles.modal}>
-      <h3>Edit {todo.title}</h3>
-      {/* フォームやボタンで編集 */}
-      <button onClick={handleSave}>Save</button>
-      <button onClick={() => onDelete(todo.id)}>Delete</button>
-      <button onClick={onClose}>Close</button>
+    <div className={styles.overlay}>
+      <div className={styles.modal}>
+        <h3>{todo.title}</h3>
+        <p className={styles.description}>{todo.description}</p>
+        <p className={styles.createdAt}>{createdAt}</p>
+        <RxUpdate className={styles.update} onClick={() => onUpdate(updatedTodo!)} />
+        <IoCloseSharp className={styles.close} onClick={onClose} />
+      </div>
     </div>
   );
 };
