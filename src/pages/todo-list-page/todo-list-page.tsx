@@ -16,7 +16,7 @@ export const TodoListPage = () => {
   //   const handleCloseModal = () => setSelectedTodo(null);
 
   const todos = [
-    new Todo(1, "Todo 1", "Description 1"),
+    new Todo(1, "Todo 1", "Description 1 So Long Word and test break card widget to next line overflow hidden any text above 3 linesDescription 1 So Long Word and test break card widget to next line overflow hidden any text"),
     new Todo(2, "Todo 2", "Description 2"),
     new Todo(3, "Todo 3", "Description 3"),
     new Todo(4, "Todo 4", "Description 4"),

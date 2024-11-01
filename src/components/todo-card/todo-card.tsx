@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./todo-card.module.css";
 import { Todo } from "../../model/todo";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { formatDateToYYYYMMDDHHMM } from "../../utils/time-format";
 
 type TodoCardProps = {
   todo: Todo;
@@ -9,11 +11,13 @@ type TodoCardProps = {
 };
 
 const TodoCard: React.FC<TodoCardProps> = ({ todo, onDelete, onEdit }) => {
+  let createdAt = formatDateToYYYYMMDDHHMM(todo.createdAt);
   return (
     <div className={styles.card} onClick={() => onEdit(todo)}>
       <h3>{todo.title}</h3>
-      <p>{todo.description}</p>
-      <button onClick={(e) => { e.stopPropagation(); onDelete(todo.id); }}>🗑️</button>
+      <p className={styles.description}>{todo.description}</p>
+      <p className={styles.createdAt}>{createdAt}</p>
+      <RiDeleteBin6Line className={styles.deleteBin} onClick={(e) => { e.stopPropagation(); onDelete(todo.id); }}/>
     </div>
   );
 };
