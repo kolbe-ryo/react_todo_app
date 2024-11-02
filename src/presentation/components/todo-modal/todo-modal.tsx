@@ -16,6 +16,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, todo, onClose, onUpdate }) => {
 
   const [updatedTodo, setUpdatedTodo] = useState<Todo | null>(todo);
 
+  // デフォルトのTodoはnullのため、todoが選択によって変更されたことを本コンポーネントに伝えるため
   useEffect(() => {
     setUpdatedTodo(todo);
   }, [todo]);

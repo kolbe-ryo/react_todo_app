@@ -34,14 +34,14 @@ export const GridViewList = () => {
 
     // カードをクリックしてモーダルを開く関数
     const handleOnTap = (todo: Todo): void => {
-        // setShowModal(!showModal);
         setSelectedTodo(todo);
     }
 
+    // モーダルによって更新された値を受け取り、Todoリストを更新する関数
     const handleUpdate = (updatedTodo: Todo): void => {
-            setTodos(todos.map(
-                todo => todo.getId() === updatedTodo.getId() ? updatedTodo : todo
-            ));
+        setTodos(todos.map(
+            todo => todo.getId() === updatedTodo.getId() ? updatedTodo : todo
+        ));
         setSelectedTodo(null);
     }
 

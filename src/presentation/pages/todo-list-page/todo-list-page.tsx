@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { TodoListPageHeader } from "./header/todo-list-header";
 import GridViewList from "./body/grid-view-list";
 import styles from "./todo-list-page.module.css";

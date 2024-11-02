@@ -40,7 +40,7 @@
   }
   
   .authButton:hover {
-    background-color: orangered;
+    background-color: rgb(253, 104, 50);
   }
   
   .toggleButton {
