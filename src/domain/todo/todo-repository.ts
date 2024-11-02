@@ -1,7 +1,7 @@
 import { Todo } from "./todo";
 
-export interface TodoRepository {
+export interface ITodoRepository {
     findAll(): Promise<Todo[]>;
     save(todo: Todo): Promise<void>;
-    delete(id: number): Promise<void>;
+    delete(id: string): Promise<void>;
 }
