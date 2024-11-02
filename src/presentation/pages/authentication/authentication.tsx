@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './authentication.module.css';
 
-export const AuthForm = () => {
+export const AuthenticationPage = () => {
   const [isLogin, setIsLogin] = useState(true);
 
   const toggleForm = () => {
@@ -35,4 +35,4 @@ export const AuthForm = () => {
   );
 };
 
-export default AuthForm;
+export default AuthenticationPage;
