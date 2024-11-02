@@ -1,20 +1,18 @@
+import { ErrorWithMessage } from "../error/error";
 
 export class Todo {
     private id: number;
     private title: string;
-    private description: string;
+    private description: string | null;
     private createdAt: Date;
 
-    constructor(id: number, title: string, description: string) {
+    constructor(id: number, title: string, description: string | null) {
         // このクラスのバリデーションを行う
         if (!id) {
-            throw new Error("id is required");
+            throw new ErrorWithMessage("入力が不正です", "IDは必須です");
         }
         if (!title) {
-            throw new Error("title is required");
-        }
-        if (!description) {
-            throw new Error("description is required");
+            throw new ErrorWithMessage("入力が不正です", "タイトルは必須です");
         }
         this.id = id;
         this.title = title;
@@ -30,7 +28,7 @@ export class Todo {
         return this.title;
     }
 
-    public getDescription(): string {
+    public getDescription(): string | null {
         return this.description;
     }
 
