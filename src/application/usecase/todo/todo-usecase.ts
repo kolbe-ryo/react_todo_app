@@ -1,18 +1,20 @@
-import { useContext } from "react";
 import { Todo } from "../../../domain/todo/todo";
 import { ITodoRepository } from "../../../domain/todo/todo-repository";
-import { TodoContext } from "../../../infrastructure/di";
 
 export class TodoUsecase {
 
     private todoRepository: ITodoRepository;
 
-    constructor() {
-        this.todoRepository = useContext(TodoContext)
+    constructor(todoRepository: ITodoRepository) {
+        this.todoRepository = todoRepository;
     }
 
     async fetchTodos(): Promise<Todo[]> {
         return this.todoRepository.findAll();
+    }
+
+    async updateTodo(todo: Todo): Promise<void> {
+        return this.todoRepository.update(todo);
     }
 
     async addTodo(todo: Todo): Promise<void> {

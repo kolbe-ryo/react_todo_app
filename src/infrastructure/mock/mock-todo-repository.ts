@@ -22,6 +22,11 @@ export class MockTodoRepository implements ITodoRepository {
         return this.todos;
     }
 
+    public async update(todo: Todo): Promise<void> {
+        // todosの中からidが一致するものを探し、更新する
+        this.todos = this.todos.map(oldTodo => oldTodo.getId() === todo.getId() ? todo : oldTodo);
+    }
+
     public async save(todo: Todo): Promise<void> {
         this.todos.push(todo);
     }
