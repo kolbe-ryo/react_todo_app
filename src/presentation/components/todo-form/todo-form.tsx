@@ -10,6 +10,7 @@ export const TodoAddForm = () => {
 
     const usecase = new TodoUsecase(useContext(TodoContext));
 
+    // TODO: Todoリストは異なるWidget上なので、どうにか通知させる方法が必要。多分Selectorとかがいいのか？
     const addTodo = async (e: React.FormEvent): Promise<void> => {
         e.preventDefault();
         await usecase.addTodo(title, description);
