@@ -17,7 +17,9 @@ export class TodoUsecase {
         return this.todoRepository.update(todo);
     }
 
-    async addTodo(todo: Todo): Promise<void> {
+    async addTodo(title: string, description: string): Promise<void> {
+        const todo = new Todo(title, description);
+        console.log(todo);
         return this.todoRepository.save(todo);
     }
 
