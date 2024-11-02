@@ -1,4 +1,4 @@
-import { ErrorWithMessage } from "../error/error";
+import { ErrorWithMessage } from "../../error/error";
 
 // ユーザークラスを作成
 export class UserAuthentication {

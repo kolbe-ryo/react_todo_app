@@ -1,4 +1,4 @@
-import { ErrorWithMessage } from "../error/error";
+import { ErrorWithMessage } from "../../error/error";
 
 export class Todo {
     private id: number;

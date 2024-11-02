@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-import TodoCard from "../../components/todo-card/todo-card";
-import TodoForm from "../../components/todo-form/todo-form";
-import Modal from "../../components/todo-modal/todo-modal";
 import { TodoListPageHeader } from "./header/todo-list-header";
 import GridViewList from "./body/grid-view-list";
-import { Todo } from "../../model/todo";
 import styles from "./todo-list-page.module.css";
 
 export const TodoListPage = () => {

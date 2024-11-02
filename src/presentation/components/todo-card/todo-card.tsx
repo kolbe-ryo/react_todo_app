@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./todo-card.module.css";
-import { Todo } from "../../../domain/todo";
+import { Todo } from "../../../domain/todo/todo";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { formatDateToYYYYMMDDHHMM } from "../../../utils/time-format";
 import Modal from "../todo-modal/todo-modal";

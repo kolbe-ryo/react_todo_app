@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from './grid-view-list.module.css';
-import { Todo } from '../../../model/todo';
+import { Todo } from "../../../../domain/todo/todo";
 import TodoCard from '../../../components/todo-card/todo-card';
 import Modal from "../../../components/todo-modal/todo-modal";
 
