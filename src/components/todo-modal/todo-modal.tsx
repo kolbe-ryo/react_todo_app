@@ -25,13 +25,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, todo, onClose, onUpdate }) => {
   console.log(todo);
   console.log(updatedTodo);
 
-  const createdAt = formatDateToYYYYMMDDHHMM(todo.createdAt);
+  const createdAt = formatDateToYYYYMMDDHHMM(todo.getCreatedAt());
 
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <h3>{todo.title}</h3>
-        <p className={styles.description}>{todo.description}</p>
+        <h3>{todo.getTitle()}</h3>
+        <p className={styles.description}>{todo.getDescription()}</p>
         <p className={styles.createdAt}>{createdAt}</p>
         <RxUpdate className={styles.update} onClick={() => onUpdate(updatedTodo!)} />
         <IoCloseSharp className={styles.close} onClick={onClose} />
