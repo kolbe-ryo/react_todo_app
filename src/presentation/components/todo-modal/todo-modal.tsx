@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./todo-modal.module.css";
-import { Todo } from "../../model/todo";
-import { formatDateToYYYYMMDDHHMM } from "../../utils/time-format";
+import { Todo } from "../../../domain/todo";
+import { formatDateToYYYYMMDDHHMM } from "../../../utils/time-format";
 import { IoCloseSharp } from "react-icons/io5";
 import { RxUpdate } from "react-icons/rx";
 

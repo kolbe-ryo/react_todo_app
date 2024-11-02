@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import TodoCard from "../../components/todo-card/todo-card";
 import TodoForm from "../../components/todo-form/todo-form";
 import Modal from "../../components/todo-modal/todo-modal";
-import { useTodos } from "../../hooks/use-todos";
 import { TodoListPageHeader } from "./header/todo-list-header";
 import GridViewList from "./body/grid-view-list";
 import { Todo } from "../../model/todo";
