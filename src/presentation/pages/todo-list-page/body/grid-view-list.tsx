@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import styles from './grid-view-list.module.css';
+import { useState } from "react";
 import { Todo } from "../../../../domain/todo/todo";
+import { TodoUsecase } from "../../../../application/usecase/todo/todo-usecase";
 import TodoCard from '../../../components/todo-card/todo-card';
 import Modal from "../../../components/todo-modal/todo-modal";
+import styles from './grid-view-list.module.css';
 
 const initialTodos = [
     new Todo("Todo 1", "Description 1 So Long Word and test break card widget to next line overflow hidden any text above 3 linesDescription 1 So Long Word and test break card widget to next line overflow hidden any text"),
@@ -21,6 +22,8 @@ const initialTodos = [
 ];
 
 export const GridViewList = () => {
+
+    const usecase = new TodoUsecase();
 
     const [todos, setTodos] = useState<Todo[]>(initialTodos);
 
