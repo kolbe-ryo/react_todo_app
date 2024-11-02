@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./todo-card.module.css";
 import { Todo } from "../../../domain/todo/todo";
 import { RiDeleteBin6Line } from "react-icons/ri";
