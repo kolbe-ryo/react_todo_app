@@ -12,14 +12,14 @@ type TodoCardProps = {
 };
 
 const TodoCard: React.FC<TodoCardProps> = ({ todo, onDelete, onTap }) => {
-  const createdAt = formatDateToYYYYMMDDHHMM(todo.createdAt);  
+  const createdAt = formatDateToYYYYMMDDHHMM(todo.getCreatedAt());  
 
   return (
     <div className={styles.card} onClick={() => onTap(todo)}>
-      <h3>{todo.title}</h3>
-      <p className={styles.description}>{todo.description}</p>
+      <h3>{todo.getTitle()}</h3>
+      <p className={styles.description}>{todo.getDescription()}</p>
       <p className={styles.createdAt}>{createdAt}</p>
-      <RiDeleteBin6Line className={styles.deleteBin} onClick={() => onDelete(todo.id)}/>
+      <RiDeleteBin6Line className={styles.deleteBin} onClick={() => onDelete(todo.getId())}/>
     </div>
   );
 };

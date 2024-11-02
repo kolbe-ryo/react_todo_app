@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./todo-modal.module.css";
 import { Todo } from "../../model/todo";
 import { formatDateToYYYYMMDDHHMM } from "../../utils/time-format";
@@ -15,6 +15,10 @@ type ModalProps = {
 const Modal: React.FC<ModalProps> = ({ isOpen, todo, onClose, onUpdate }) => {
 
   const [updatedTodo, setUpdatedTodo] = useState<Todo | null>(todo);
+
+  useEffect(() => {
+    setUpdatedTodo(todo);
+  }, [todo]);
 
   if (!isOpen || !todo) return null;
 

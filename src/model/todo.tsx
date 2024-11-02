@@ -1,9 +1,9 @@
 
 export class Todo {
-    id: number;
-    title: string;
-    description: string;
-    createdAt: Date;
+    private id: number;
+    private title: string;
+    private description: string;
+    private createdAt: Date;
 
     constructor(id: number, title: string, description: string) {
         // このクラスのバリデーションを行う
@@ -20,5 +20,21 @@ export class Todo {
         this.title = title;
         this.description = description;
         this.createdAt = new Date();
+    }
+
+    public getId(): number {
+        return this.id;
+    }
+
+    public getTitle(): string {
+        return this.title;
+    }
+
+    public getDescription(): string {
+        return this.description;
+    }
+
+    public getCreatedAt(): Date {
+        return this.createdAt;
     }
 }

@@ -24,13 +24,12 @@ export const GridViewList = () => {
 
     const [todos, setTodos] = useState<Todo[]>(initialTodos);
 
-    // const [showModal, setShowModal] = useState<boolean>(false);
-
+    // todoが選択されたかどうかはNullか否かで判断する
     const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
 
     // ゴミ箱をクリックしてTodoを削除する関数
     const handleDelete = (id: number): void => {
-        setTodos(todos.filter(todo => todo.id !== id));
+        setTodos(todos.filter(todo => todo.getId() !== id));
     }
 
     // カードをクリックしてモーダルを開く関数
@@ -40,11 +39,9 @@ export const GridViewList = () => {
     }
 
     const handleUpdate = (updatedTodo: Todo): void => {
-        if (updatedTodo) {
             setTodos(todos.map(
-                todo => todo.id === updatedTodo.id ? updatedTodo : todo
+                todo => todo.getId() === updatedTodo.getId() ? updatedTodo : todo
             ));
-        }
         setSelectedTodo(null);
     }
 
@@ -54,7 +51,7 @@ export const GridViewList = () => {
         <div className={styles.gridView}>
             {todos.map(todo => (
                 <TodoCard
-                    key={todo.id}
+                    key={todo.getId()}
                     todo={todo}
                     onDelete={handleDelete}
                     onTap={handleOnTap}
