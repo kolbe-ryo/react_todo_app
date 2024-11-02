@@ -1,51 +1,43 @@
-import React, { useState } from "react";
-import styles from './grid-view-list.module.css';
+import { useContext, useEffect, useState } from "react";
 import { Todo } from "../../../../domain/todo/todo";
+import { TodoUsecase } from "../../../../application/usecase/todo/todo-usecase";
+import { TodoContext } from "../../../../infrastructure/di";
 import TodoCard from '../../../components/todo-card/todo-card';
 import Modal from "../../../components/todo-modal/todo-modal";
-
-const initialTodos = [
-    new Todo(1, "Todo 1", "Description 1 So Long Word and test break card widget to next line overflow hidden any text above 3 linesDescription 1 So Long Word and test break card widget to next line overflow hidden any text"),
-    new Todo(2, "Todo 2", "Description 2"),
-    new Todo(3, "Todo 3", "Description 3"),
-    new Todo(4, "Todo 4", "Description 4"),
-    new Todo(5, "Todo 5", "Description 5"),
-    new Todo(6, "Todo 6", "Description 6"),
-    new Todo(7, "Todo 7", "Description 7"),
-    new Todo(8, "Todo 8", "Description 8"),
-    new Todo(9, "Todo 9", "Description 9"),
-    new Todo(10, "Todo 10", "Description 10"),
-    new Todo(11, "Todo 11", "Description 11"),
-    new Todo(12, "Todo 12", "Description 12"),
-    new Todo(13, "Todo 13", "Description 13"),
-];
+import styles from './grid-view-list.module.css';
 
 export const GridViewList = () => {
+    // Todoリストの管理state
+    const [todos, setTodos] = useState<Todo[]>([]);
 
-    const [todos, setTodos] = useState<Todo[]>(initialTodos);
-
+    // 選択されたTodoを管理するstate
     // todoが選択されたかどうかはNullか否かで判断する
     const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
 
-    // ゴミ箱をクリックしてTodoを削除する関数
-    const handleDelete = (id: number): void => {
-        setTodos(todos.filter(todo => todo.getId() !== id));
+    const usecase = new TodoUsecase(useContext(TodoContext));
+
+    const fetchTodos = async (): Promise<void> => {
+        const todos = await usecase.fetchTodos();
+        setTodos(todos);
     }
 
-    // カードをクリックしてモーダルを開く関数
-    const handleOnTap = (todo: Todo): void => {
-        setSelectedTodo(todo);
-    }
-
-    // モーダルによって更新された値を受け取り、Todoリストを更新する関数
-    const handleUpdate = (updatedTodo: Todo): void => {
-        setTodos(todos.map(
-            todo => todo.getId() === updatedTodo.getId() ? updatedTodo : todo
-        ));
+    const updateTodo = async (updatedTodo: Todo): Promise<void> => {
+        await usecase.updateTodo(updatedTodo);
+        await fetchTodos();
         setSelectedTodo(null);
     }
 
-    console.log(selectedTodo);
+    const deleteTodo = async (id: string): Promise<void> => {
+        await usecase.removeTodo(id);
+        setTodos(todos.filter(todo => todo.getId() !== id));
+    }
+
+    // Todoリストを取得するとともに、todosの変更を監視し常に最新化する
+    // ベストプラクティスではないかもしれないが、todosはリポジトリの最新を常に反映したいので、このような実装にした
+    useEffect(() => {
+        fetchTodos();
+        console.log("fetch todos");
+    }, [todos]);
 
     return (
         <div className={styles.gridView}>
@@ -53,15 +45,15 @@ export const GridViewList = () => {
                 <TodoCard
                     key={todo.getId()}
                     todo={todo}
-                    onDelete={handleDelete}
-                    onTap={handleOnTap}
+                    onDelete={deleteTodo}
+                    onTap={setSelectedTodo}
                 />
             ))}
             <Modal
                 isOpen={selectedTodo != null}
                 todo={selectedTodo}
                 onClose={() => setSelectedTodo(null)}
-                onUpdate={handleUpdate}
+                onUpdate={updateTodo}
             />
         </div>
     );

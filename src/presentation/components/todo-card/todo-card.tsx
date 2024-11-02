@@ -6,7 +6,7 @@ import { formatDateToYYYYMMDDHHMM } from "../../../utils/time-format";
 
 type TodoCardProps = {
   todo: Todo;
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
   onTap: (todo: Todo) => void;
 };
 

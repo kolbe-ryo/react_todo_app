@@ -1,59 +1,57 @@
+/* AuthForm.css */
+.authContainer {
+  padding: 2rem;
+  width: 30%;
+  height: 100%;
+  text-align: center;
+  margin: 100px auto;
+}
 
-  /* AuthForm.css */
-  .authContainer {
-    padding: 2rem;
-    width: 30%;
-    height: 100%;
-    text-align: center;
-    margin:100px auto ;
-  }
-  
-  .authTitle {
-    font-size: 24px;
-    color: orange;
-    margin-bottom: 1rem;
-  }
-  
-  .authForm {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .authInput {
-    padding: 0.75rem;
-    margin: 0.5rem 0;
-    border: 1px solid #eaeaea;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  .authButton {
-    background-color: orange;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 0.75rem;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 1rem;
-    transition: background-color 0.3s;
-  }
-  
-  .authButton:hover {
-    background-color: rgb(253, 104, 50);
-  }
-  
-  .toggleButton {
-    background: none;
-    border: none;
-    color: orange;
-    margin-top: 1rem;
-    font-size: 14px;
-    cursor: pointer;
-    transition: color 0.3s;
-  }
-  
-  .toggleButton:hover {
-    color: orangered;
-  }
-  
+.authTitle {
+  font-size: 24px;
+  color: orange;
+  margin-bottom: 1rem;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.authInput {
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.authButton {
+  background-color: orange;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s;
+}
+
+.authButton:hover {
+  background-color: rgb(253, 104, 50);
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  color: orange;
+  margin-top: 1rem;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.toggleButton:hover {
+  color: orangered;
+}
