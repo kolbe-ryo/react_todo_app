@@ -10,7 +10,7 @@ import styles from "./todo-list-page.module.css";
 export const TodoListPage = () => {
   // TodosをTodoListPageのstateとして持つことで、配下コンポーネントで利用可能にする
   const [todos, setTodos] = useState<Todo[]>([]);
-  const setState = setTodos;
+  const setState = () => setTodos(prev => todos);
 
   return (
     <TodoContext.Provider value={useContext(TodoContext)}>
