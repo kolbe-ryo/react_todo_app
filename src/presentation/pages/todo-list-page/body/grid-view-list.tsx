@@ -5,10 +5,13 @@ import { TodoContext } from "../../../../infrastructure/di";
 import TodoCard from '../../../components/todo-card/todo-card';
 import Modal from "../../../components/todo-modal/todo-modal";
 import styles from './grid-view-list.module.css';
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../../redux/store";
+import { todosReducer } from "../../../../application/state/todo-state";
 
 export const GridViewList = () => {
-    // Todoリストの管理state
-    const [todos, setTodos] = useState<Todo[]>([]);
+    const dispatch = useDispatch();
+    const todos = useSelector((state: RootState) => state.todos.value); 
 
     // 選択されたTodoを管理するstate
     // todoが選択されたかどうかはNullか否かで判断する
@@ -18,26 +21,24 @@ export const GridViewList = () => {
 
     const fetchTodos = async (): Promise<void> => {
         const todos = await usecase.fetchTodos();
-        setTodos(todos);
+        dispatch(todosReducer(todos));
     }
 
-    const updateTodo = async (updatedTodo: Todo): Promise<void> => {
-        await usecase.updateTodo(updatedTodo);
-        await fetchTodos();
-        setSelectedTodo(null);
-    }
+    // const updateTodo = async (updatedTodo: Todo): Promise<void> => {
+    //     await usecase.updateTodo(updatedTodo);
+    //     await fetchTodos();
+    //     setSelectedTodo(null);
+    // }
 
     const deleteTodo = async (id: string): Promise<void> => {
-        await usecase.removeTodo(id);
-        setTodos(todos.filter(todo => todo.getId() !== id));
+        const todos = await usecase.removeTodo(id);
+        dispatch(todosReducer(todos));
     }
 
-    // Todoリストを取得するとともに、todosの変更を監視し常に最新化する
-    // ベストプラクティスではないかもしれないが、todosはリポジトリの最新を常に反映したいので、このような実装にした
     useEffect(() => {
         fetchTodos();
         console.log("fetch todos");
-    }, [todos]);
+    }, []);
 
     return (
         <div className={styles.gridView}>
@@ -53,7 +54,7 @@ export const GridViewList = () => {
                 isOpen={selectedTodo != null}
                 todo={selectedTodo}
                 onClose={() => setSelectedTodo(null)}
-                onUpdate={updateTodo}
+                // onUpdate={updateTodo}
             />
         </div>
     );

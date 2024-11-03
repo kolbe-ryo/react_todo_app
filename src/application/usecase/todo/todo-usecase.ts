@@ -13,17 +13,16 @@ export class TodoUsecase {
         return this.todoRepository.findAll();
     }
 
-    async updateTodo(todo: Todo): Promise<void> {
+    async updateTodo(todo: Todo): Promise<Todo[]> {
         return this.todoRepository.update(todo);
     }
 
-    async addTodo(title: string, description: string): Promise<void> {
+    async addTodo(title: string, description: string): Promise<Todo[]> {
         const todo = new Todo(title, description);
-        console.log(todo);
         return this.todoRepository.save(todo);
     }
 
-    async removeTodo(id: string): Promise<void> {
+    async removeTodo(id: string): Promise<Todo[]> {
         return this.todoRepository.delete(id);
     }
 }

@@ -5,29 +5,31 @@ import { IoCloseSharp } from "react-icons/io5";
 import { RxUpdate } from "react-icons/rx";
 import { TodoUsecase } from "../../../application/usecase/todo/todo-usecase";
 import { TodoContext } from "../../../infrastructure/di";
-import { TodoStateContext } from "../../../application/state/todo-state";
+// import { TodoStateContext } from "../../../application/state/todo-state";
 import styles from "./todo-modal.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
+import { todosReducer } from "../../../application/state/todo-state";
 
 type ModalProps = {
   isOpen: boolean;
   todo: Todo | null;
   onClose: () => void;
-  onUpdate: (updatedTodo: Todo) => Promise<void>;
+  // onUpdate: (updatedTodo: Todo) => Promise<void>;
 };
 
-const Modal: React.FC<ModalProps> = ({ isOpen, todo, onClose, onUpdate }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, todo, onClose }) => {
+  const dispatch = useDispatch();
+  const todos = useSelector((state: RootState) => state.todos.value);
 
-  // Modalコンポーネント作成時のデフォルトのTodoはnullのため、todo選択によって変更されたことをこのコンポーネントに伝えるため
-  useEffect(() => {
-    setUpdatedTodo(todo);
-  }, [todo]);
+    // Modalコンポーネント作成時のデフォルトのTodoはnullのため、todo選択によって変更されたことをこのコンポーネントに伝えるため
+    useEffect(() => {
+      setUpdatedTodo(todo);
+    }, [todo]);
 
   const [updatedTodo, setUpdatedTodo] = useState<Todo | null>(todo);
 
   const usecase = new TodoUsecase(useContext(TodoContext));
-
-  const { setState } = useContext(TodoStateContext);
-
 
   // todoが存在しない場合ガードするので、以降はtodoが存在することが保証される
   if (!isOpen || !todo) return null;
@@ -35,13 +37,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, todo, onClose, onUpdate }) => {
   const createdAt = formatDateToYYYYMMDDHHMM(todo.getCreatedAt());
 
   const updateTodo = async (e: React.FormEvent): Promise<void> => {
-    await usecase.updateTodo(updatedTodo!);
-    const todos = await usecase.fetchTodos();
-    setState(todos);
+    const todos = await usecase.updateTodo(updatedTodo!);
+    dispatch(todosReducer(todos));
     setUpdatedTodo(null);
   }
-
-
 
   return (
     <div className={styles.overlay}>
@@ -66,7 +65,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, todo, onClose, onUpdate }) => {
         </div>
         <p className={styles.description}>{todo.getDescription()}</p>
         <p className={styles.createdAt}>{createdAt}</p>
-        <RxUpdate className={styles.update} onClick={() => onUpdate(updatedTodo!)} />
+        <RxUpdate className={styles.update} onClick={updateTodo} />
         <IoCloseSharp className={styles.close} onClick={onClose} />
       </div>
     </div>

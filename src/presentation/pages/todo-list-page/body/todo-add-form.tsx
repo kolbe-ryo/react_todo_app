@@ -1,23 +1,21 @@
 import { useContext, useState } from "react";
 import { TodoUsecase } from "../../../../application/usecase/todo/todo-usecase";
 import { TodoContext } from "../../../../infrastructure/di";
-import { TodoStateContext } from "../../../../application/state/todo-state";
+import { useDispatch } from "react-redux";
+import { todosReducer } from "../../../../application/state/todo-state";
 import styles from "./todo-add-form.module.css";
 
 export const TodoAddForm = () => {
+    const dispatch = useDispatch();
+    const usecase = new TodoUsecase(useContext(TodoContext));
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
-    const usecase = new TodoUsecase(useContext(TodoContext));
-
-    const { setState } = useContext(TodoStateContext);
-
     const addTodo = async (e: React.FormEvent): Promise<void> => {
         e.preventDefault();
-        await usecase.addTodo(title, description);
-        const todos = await usecase.fetchTodos();
-        setState(todos);
+        const todos = await usecase.addTodo(title, description);
+        dispatch(todosReducer(todos));
         setTitle("");
         setDescription("");
     }
