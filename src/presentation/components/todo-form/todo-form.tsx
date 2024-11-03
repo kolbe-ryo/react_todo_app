@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import styles from "./todo-form.module.css";
 import { TodoUsecase } from "../../../application/usecase/todo/todo-usecase";
 import { TodoContext } from "../../../infrastructure/di";
+import { TodoStateContext } from "../../../application/state/todo-state";
 
 export const TodoAddForm = () => {
 
@@ -10,10 +11,13 @@ export const TodoAddForm = () => {
 
     const usecase = new TodoUsecase(useContext(TodoContext));
 
-    // TODO: Todoリストは異なるWidget上なので、どうにか通知させる方法が必要。多分Selectorとかがいいのか？
+    const { setState } = useContext(TodoStateContext);
+
     const addTodo = async (e: React.FormEvent): Promise<void> => {
         e.preventDefault();
         await usecase.addTodo(title, description);
+        const todos = await usecase.fetchTodos();
+        setState(todos);
         setTitle("");
         setDescription("");
     }
