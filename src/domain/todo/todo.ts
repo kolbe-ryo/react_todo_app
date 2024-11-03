@@ -4,7 +4,7 @@ import { ErrorWithMessage } from "../../error/error";
 export class Todo {
     private id: string;
     private title: string;
-    private description: string | null;
+    private description: string;
     private createdAt: Date;
 
     constructor(title: string, description: string | null) {
@@ -13,7 +13,7 @@ export class Todo {
         }
         this.id = uuidv4();
         this.title = title;
-        this.description = description;
+        this.description = description ?? "";
         this.createdAt = new Date();
     }
 
@@ -25,12 +25,22 @@ export class Todo {
         return this.title;
     }
 
-    public getDescription(): string | null {
+    public getDescription(): string {
         return this.description;
     }
 
     public getCreatedAt(): Date {
         return this.createdAt;
+    }
+
+    public updateTitle(title: string): this {
+        this.title = title;
+        return this;
+    }
+
+    public updateDescription(description: string): this {
+        this.description = description;
+        return this;
     }
 
     public toJson(): string {

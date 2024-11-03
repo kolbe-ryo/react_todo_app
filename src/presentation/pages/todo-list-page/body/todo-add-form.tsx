@@ -1,30 +1,30 @@
 import { useContext, useState } from "react";
-// import styles from "./todo-form.module.css";
-import { TodoUsecase } from "../../../application/usecase/todo/todo-usecase";
-import { TodoContext } from "../../../infrastructure/di";
-import { TodoStateContext } from "../../../application/state/todo-state";
+import { TodoUsecase } from "../../../../application/usecase/todo/todo-usecase";
+import { TodoContext } from "../../../../infrastructure/di";
+import { TodoStateContext } from "../../../../application/state/todo-state";
+import styles from "./todo-add-form.module.css";
 
 export const TodoAddForm = () => {
 
-    // const [title, setTitle] = useState("");
-    // const [description, setDescription] = useState("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
 
-    // const usecase = new TodoUsecase(useContext(TodoContext));
+    const usecase = new TodoUsecase(useContext(TodoContext));
 
-    // const { setState } = useContext(TodoStateContext);
+    const { setState } = useContext(TodoStateContext);
 
-    // const addTodo = async (e: React.FormEvent): Promise<void> => {
-    //     e.preventDefault();
-    //     await usecase.addTodo(title, description);
-    //     const todos = await usecase.fetchTodos();
-    //     setState(todos);
-    //     setTitle("");
-    //     setDescription("");
-    // }
+    const addTodo = async (e: React.FormEvent): Promise<void> => {
+        e.preventDefault();
+        await usecase.addTodo(title, description);
+        const todos = await usecase.fetchTodos();
+        setState(todos);
+        setTitle("");
+        setDescription("");
+    }
 
     return (
-        <div >
-            {/* <form onSubmit={addTodo} className={styles.form}>
+        <div className={styles.formArea}>
+            <form onSubmit={addTodo} className={styles.form}>
                 <input
                     type="text"
                     placeholder="タイトル"
@@ -43,7 +43,7 @@ export const TodoAddForm = () => {
                     className={styles.inputDescription}
                 />
                 <button type="submit" className={styles.button}>Submit</button>
-            </form> */}
+            </form>
         </div>
     );
 };
