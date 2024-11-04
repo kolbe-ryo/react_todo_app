@@ -17,6 +17,7 @@ export const LoginPage = () => {
         setLoading(true);
         const { error } = await supabase.auth.signInWithPassword({ email, password })
 
+        // TODO: エラー処理を追加する
         if (error) {
             alert(error.cause || error.message)
         } else {
