@@ -59,6 +59,6 @@ export class Todo {
             .updateDescription(todo.description);
     }
 
-    public static titleValidationReg: string = '.*[^\s]+.*';
+    public static titleValidationReg: string = '.*[^s]+.*';
 
 }
