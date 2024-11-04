@@ -2,12 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { Todo } from "../../../../domain/todo/todo";
 import { TodoUsecase } from "../../../../application/usecase/todo/todo-usecase";
 import { TodoContext } from "../../../../infrastructure/di";
-import TodoCard from '../../../components/todo-card/todo-card';
-import Modal from "../../../components/todo-modal/todo-modal";
-import styles from './grid-view-list.module.css';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../redux/store";
 import { todosReducer } from "../../../../application/state/todo-state";
+import TodoCard from '../../../components/todo-card/todo-card';
+import Modal from "../../../components/todo-modal/todo-modal";
+import styles from './grid-view-list.module.css';
 
 export const GridViewList = () => {
     // DI
@@ -25,10 +25,16 @@ export const GridViewList = () => {
         dispatch(todosReducer(todos));
     }
 
+    const updateTodo = async (updatedTodo: Todo): Promise<void> => {
+        const todos = await usecase.updateTodo(updatedTodo);
+        dispatch(todosReducer(todos));
+        setSelectedTodo(null);
+    }
+
     // 初回のみ実行したいので、空の配列を第二引数に渡す
     useEffect(() => {
         fetchTodos();
-        console.log("fetch todos");
+        // eslint-disable-next-line
     }, []);
 
     return (
@@ -40,12 +46,12 @@ export const GridViewList = () => {
                     onTap={setSelectedTodo}
                 />
             ))}
-            <Modal
-                isOpen={selectedTodo != null}
+            {/* // todoが選択された場合のみModalを表示する */}
+            {selectedTodo && (<Modal
                 todo={selectedTodo}
                 onClose={() => setSelectedTodo(null)}
-            // onUpdate={updateTodo}
-            />
+                onUpdate={updateTodo}
+            />)}
         </div>
     );
 };
