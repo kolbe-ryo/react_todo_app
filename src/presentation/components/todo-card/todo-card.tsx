@@ -20,7 +20,7 @@ const TodoCard: React.FC<TodoCardProps> = ({ todo, onTap }) => {
 
   const createdAt = formatDateToYYYYMMDDHHMM(todo.getCreatedAt());
 
-  const onDeleteNoPropagation = async (event: any): Promise<void> => {
+  const onDeleteTodoNoPropagation = async (event: any): Promise<void> => {
     event.stopPropagation();
     const todos = await usecase.removeTodo(todo.getId());
     dispatch(todosReducer(todos));
@@ -31,7 +31,7 @@ const TodoCard: React.FC<TodoCardProps> = ({ todo, onTap }) => {
       <h3>{todo.getTitle()}</h3>
       <p className={styles.description}>{todo.getDescription()}</p>
       <p className={styles.createdAt}>{createdAt}</p>
-      <RiDeleteBin6Line className={styles.deleteBin} onClick={onDeleteNoPropagation} />
+      <RiDeleteBin6Line className={styles.deleteBin} onClick={onDeleteTodoNoPropagation} />
     </div>
   );
 };
