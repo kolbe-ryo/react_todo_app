@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Todo } from '../../domain/todo/todo'
 
+// Todoリストを管理するState
 export const todosSlice = createSlice({
   name: 'todos',
   initialState: {
@@ -10,11 +11,9 @@ export const todosSlice = createSlice({
     todosReducer: (state, action: PayloadAction<Todo[]>) => {
         state.value = [...action.payload];
     },
-    // TODO: activeTOdoを保存するreducerを作成する
   },
 })
 
-// Action creators are generated for each case reducer function
 export const { todosReducer } = todosSlice.actions
 
 export default todosSlice.reducer

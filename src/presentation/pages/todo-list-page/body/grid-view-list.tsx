@@ -10,31 +10,22 @@ import { RootState } from "../../../../redux/store";
 import { todosReducer } from "../../../../application/state/todo-state";
 
 export const GridViewList = () => {
+    // DI
     const dispatch = useDispatch();
-    const todos = useSelector((state: RootState) => state.todos.value); 
+    const usecase = new TodoUsecase(useContext(TodoContext));
+    const todos = useSelector((state: RootState) => state.todos.value);
 
     // 選択されたTodoを管理するstate
     // todoが選択されたかどうかはNullか否かで判断する
     const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
 
-    const usecase = new TodoUsecase(useContext(TodoContext));
 
     const fetchTodos = async (): Promise<void> => {
         const todos = await usecase.fetchTodos();
         dispatch(todosReducer(todos));
     }
 
-    // const updateTodo = async (updatedTodo: Todo): Promise<void> => {
-    //     await usecase.updateTodo(updatedTodo);
-    //     await fetchTodos();
-    //     setSelectedTodo(null);
-    // }
-
-    const deleteTodo = async (id: string): Promise<void> => {
-        const todos = await usecase.removeTodo(id);
-        dispatch(todosReducer(todos));
-    }
-
+    // 初回のみ実行したいので、空の配列を第二引数に渡す
     useEffect(() => {
         fetchTodos();
         console.log("fetch todos");
@@ -46,7 +37,6 @@ export const GridViewList = () => {
                 <TodoCard
                     key={todo.getId()}
                     todo={todo}
-                    onDelete={deleteTodo}
                     onTap={setSelectedTodo}
                 />
             ))}
@@ -54,7 +44,7 @@ export const GridViewList = () => {
                 isOpen={selectedTodo != null}
                 todo={selectedTodo}
                 onClose={() => setSelectedTodo(null)}
-                // onUpdate={updateTodo}
+            // onUpdate={updateTodo}
             />
         </div>
     );
