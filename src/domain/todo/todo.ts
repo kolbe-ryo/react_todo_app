@@ -7,14 +7,14 @@ export class Todo {
     private description: string;
     private createdAt: Date;
 
-    constructor(title: string, description: string | null) {
+    constructor(id: string ,title: string, description: string | null, createdAt: Date) {
         if (!title) {
             throw new ErrorWithMessage("入力が不正です", "タイトルは必須です");
         }
-        this.id = uuidv4();
+        this.id = id;
         this.title = title;
         this.description = description ?? "";
-        this.createdAt = new Date();
+        this.createdAt = createdAt;
     }
 
     public getId(): string {
@@ -54,9 +54,7 @@ export class Todo {
 
     public static fromJson(json: string): Todo {
         const todo = JSON.parse(json);
-        return new Todo(todo.title, todo.description)
-            .updateTitle(todo.title)
-            .updateDescription(todo.description);
+        return new Todo(todo.id, todo.title, todo.description, new Date(todo.createdAt));
     }
 
     public static titleValidationReg: string = '.*[^s]+.*';
