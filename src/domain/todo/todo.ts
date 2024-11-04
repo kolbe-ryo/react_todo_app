@@ -51,4 +51,14 @@ export class Todo {
             createdAt: this.createdAt
         });
     }
+
+    public static fromJson(json: string): Todo {
+        const todo = JSON.parse(json);
+        return new Todo(todo.title, todo.description)
+            .updateTitle(todo.title)
+            .updateDescription(todo.description);
+    }
+
+    public static titleValidationReg: string = '.*[^\s]+.*';
+
 }

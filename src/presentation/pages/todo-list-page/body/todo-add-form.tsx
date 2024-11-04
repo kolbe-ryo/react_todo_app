@@ -4,6 +4,7 @@ import { TodoContext } from "../../../../infrastructure/di";
 import { useDispatch } from "react-redux";
 import { todosReducer } from "../../../../application/state/todo-state";
 import styles from "./todo-add-form.module.css";
+import { Todo } from "../../../../domain/todo/todo";
 
 export const TodoAddForm = () => {
     const dispatch = useDispatch();
@@ -30,7 +31,7 @@ export const TodoAddForm = () => {
                     onChange={(e) => setTitle(e.target.value)}
                     className={styles.inputTitle}
                     required
-                    pattern=".*[^\s]+.*"
+                    pattern={Todo.titleValidationReg}
                     title="タイトルは空白は禁止されています"
                 />
                 <input
