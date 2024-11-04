@@ -1,40 +1,49 @@
-import React, { useState, useEffect } from "react";
-import styles from "./todo-modal.module.css";
+import React, { useState } from "react";
 import { Todo } from "../../../domain/todo/todo";
-import { formatDateToYYYYMMDDHHMM } from "../../../utils/time-format";
 import { IoCloseSharp } from "react-icons/io5";
-import { RxUpdate } from "react-icons/rx";
+import styles from "./todo-modal.module.css";
 
 type ModalProps = {
-  isOpen: boolean;
-  todo: Todo | null;
+  todo: Todo;
   onClose: () => void;
-  onUpdate: (updatedTodo: Todo) => void;
+  onUpdate: (updatedTodo: Todo) => Promise<void>;
 };
 
-const Modal: React.FC<ModalProps> = ({ isOpen, todo, onClose, onUpdate }) => {
+const Modal: React.FC<ModalProps> = ({ todo, onClose, onUpdate }) => {
 
-  const [updatedTodo, setUpdatedTodo] = useState<Todo | null>(todo);
+  const [title, setTitle] = useState(todo.getTitle());
+  const [description, setDescription] = useState(todo.getDescription());
 
-  // デフォルトのTodoはnullのため、todoが選択によって変更されたことを本コンポーネントに伝えるため
-  useEffect(() => {
-    setUpdatedTodo(todo);
-  }, [todo]);
-
-  if (!isOpen || !todo) return null;
-
-  console.log(todo);
-  console.log(updatedTodo);
-
-  const createdAt = formatDateToYYYYMMDDHHMM(todo.getCreatedAt());
+  const onUpdateTodo = async (event: React.FormEvent): Promise<void> => {
+    event.preventDefault();
+    const updatedTodos = todo.updateTitle(title).updateDescription(description);
+    onUpdate(updatedTodos);
+  }
 
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <h3>{todo.getTitle()}</h3>
-        <p className={styles.description}>{todo.getDescription()}</p>
-        <p className={styles.createdAt}>{createdAt}</p>
-        <RxUpdate className={styles.update} onClick={() => onUpdate(updatedTodo!)} />
+        <form onSubmit={onUpdateTodo} className={styles.form}>
+          <input
+            type="text"
+            placeholder="タイトル"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className={styles.inputTitle}
+            required
+            pattern=".*[^\s]+.*"
+            title="タイトルは空白は禁止されています"
+          />
+          <input
+            type="text"
+            placeholder="説明"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className={styles.inputDescription}
+          />
+          <button type="submit" className={styles.button}>更新</button>
+        </form>
         <IoCloseSharp className={styles.close} onClick={onClose} />
       </div>
     </div>

@@ -24,11 +24,7 @@ export class UserAuthentication {
         this.password = password;
     }
 
-    public toJson(): string {
-        return JSON.stringify({
-            userId: this.userId,
-            email: this.email,
-            password: this.password
-        });
-    }
+    public static emailValidationReg: string = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$";
+
+    public static passwordValidationReg: string = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).{8,}";
 }

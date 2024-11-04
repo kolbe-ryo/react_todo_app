@@ -13,6 +13,12 @@
   margin-bottom: 1rem;
 }
 
+.icon {
+  margin: 50px 0;
+  font-size: 60px;
+  color: orange;
+}
+
 .authForm {
   display: flex;
   flex-direction: column;

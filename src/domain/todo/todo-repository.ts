@@ -2,7 +2,7 @@ import { Todo } from "./todo";
 
 export interface ITodoRepository {
     findAll(): Promise<Todo[]>;
-    update(todo: Todo): Promise<void>;
-    save(todo: Todo): Promise<void>;
-    delete(id: string): Promise<void>;
+    update(todo: Todo): Promise<Todo[]>;
+    save(todo: Todo): Promise<Todo[]>;
+    delete(id: string): Promise<Todo[]>;
 }

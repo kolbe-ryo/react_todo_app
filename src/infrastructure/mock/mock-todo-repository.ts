@@ -22,16 +22,19 @@ export class MockTodoRepository implements ITodoRepository {
         return this.todos;
     }
 
-    public async update(todo: Todo): Promise<void> {
+    public async update(todo: Todo): Promise<Todo[]> {
         // todosの中からidが一致するものを探し、更新する
         this.todos = this.todos.map(oldTodo => oldTodo.getId() === todo.getId() ? todo : oldTodo);
+        return this.todos;
     }
 
-    public async save(todo: Todo): Promise<void> {
+    public async save(todo: Todo): Promise<Todo[]> {
         this.todos.push(todo);
+        return this.todos;
     }
 
-    public async delete(id: string): Promise<void> {
+    public async delete(id: string): Promise<Todo[]> {
         this.todos = this.todos.filter(todo => todo.getId() !== id);
+        return this.todos;
     }
 }

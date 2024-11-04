@@ -2,42 +2,40 @@ import { useContext, useEffect, useState } from "react";
 import { Todo } from "../../../../domain/todo/todo";
 import { TodoUsecase } from "../../../../application/usecase/todo/todo-usecase";
 import { TodoContext } from "../../../../infrastructure/di";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../../redux/store";
+import { todosReducer } from "../../../../application/state/todo-state";
 import TodoCard from '../../../components/todo-card/todo-card';
 import Modal from "../../../components/todo-modal/todo-modal";
 import styles from './grid-view-list.module.css';
 
 export const GridViewList = () => {
-    // Todoリストの管理state
-    const [todos, setTodos] = useState<Todo[]>([]);
+    // DI
+    const dispatch = useDispatch();
+    const usecase = new TodoUsecase(useContext(TodoContext));
+    const todos = useSelector((state: RootState) => state.todos.value);
 
     // 選択されたTodoを管理するstate
     // todoが選択されたかどうかはNullか否かで判断する
     const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
 
-    const usecase = new TodoUsecase(useContext(TodoContext));
 
     const fetchTodos = async (): Promise<void> => {
         const todos = await usecase.fetchTodos();
-        setTodos(todos);
+        dispatch(todosReducer(todos));
     }
 
     const updateTodo = async (updatedTodo: Todo): Promise<void> => {
-        await usecase.updateTodo(updatedTodo);
-        await fetchTodos();
+        const todos = await usecase.updateTodo(updatedTodo);
+        dispatch(todosReducer(todos));
         setSelectedTodo(null);
     }
 
-    const deleteTodo = async (id: string): Promise<void> => {
-        await usecase.removeTodo(id);
-        setTodos(todos.filter(todo => todo.getId() !== id));
-    }
-
-    // Todoリストを取得するとともに、todosの変更を監視し常に最新化する
-    // ベストプラクティスではないかもしれないが、todosはリポジトリの最新を常に反映したいので、このような実装にした
+    // 初回のみ実行したいので、空の配列を第二引数に渡す
     useEffect(() => {
         fetchTodos();
-        console.log("fetch todos");
-    }, [todos]);
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <div className={styles.gridView}>
@@ -45,16 +43,15 @@ export const GridViewList = () => {
                 <TodoCard
                     key={todo.getId()}
                     todo={todo}
-                    onDelete={deleteTodo}
                     onTap={setSelectedTodo}
                 />
             ))}
-            <Modal
-                isOpen={selectedTodo != null}
+            {/* // todoが選択された場合のみModalを表示する */}
+            {selectedTodo && (<Modal
                 todo={selectedTodo}
                 onClose={() => setSelectedTodo(null)}
                 onUpdate={updateTodo}
-            />
+            />)}
         </div>
     );
 };

@@ -1,19 +1,22 @@
 import { useContext, useState } from "react";
-import styles from "./todo-form.module.css";
-import { TodoUsecase } from "../../../application/usecase/todo/todo-usecase";
-import { TodoContext } from "../../../infrastructure/di";
+import { TodoUsecase } from "../../../../application/usecase/todo/todo-usecase";
+import { TodoContext } from "../../../../infrastructure/di";
+import { useDispatch } from "react-redux";
+import { todosReducer } from "../../../../application/state/todo-state";
+import styles from "./todo-add-form.module.css";
+import { Todo } from "../../../../domain/todo/todo";
 
 export const TodoAddForm = () => {
+    const dispatch = useDispatch();
+    const usecase = new TodoUsecase(useContext(TodoContext));
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
-    const usecase = new TodoUsecase(useContext(TodoContext));
-
-    // TODO: Todoリストは異なるWidget上なので、どうにか通知させる方法が必要。多分Selectorとかがいいのか？
     const addTodo = async (e: React.FormEvent): Promise<void> => {
         e.preventDefault();
-        await usecase.addTodo(title, description);
+        const todos = await usecase.addTodo(title, description);
+        dispatch(todosReducer(todos));
         setTitle("");
         setDescription("");
     }
@@ -28,7 +31,7 @@ export const TodoAddForm = () => {
                     onChange={(e) => setTitle(e.target.value)}
                     className={styles.inputTitle}
                     required
-                    pattern=".*[^\s]+.*"
+                    pattern={Todo.titleValidationReg}
                     title="タイトルは空白は禁止されています"
                 />
                 <input
@@ -38,7 +41,7 @@ export const TodoAddForm = () => {
                     onChange={(e) => setDescription(e.target.value)}
                     className={styles.inputDescription}
                 />
-                <button type="submit" className={styles.button}>Submit</button>
+                <button type="submit" className={styles.button}>追加</button>
             </form>
         </div>
     );

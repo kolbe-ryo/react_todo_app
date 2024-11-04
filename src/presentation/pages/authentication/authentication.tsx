@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './authentication.module.css';
+import { SiAdguard } from "react-icons/si";
+import { UserAuthentication } from '../../../domain/authentication/user-auth';
 
 export const AuthenticationPage = () => {
 
@@ -13,25 +15,22 @@ export const AuthenticationPage = () => {
   return (
     <div className={styles.authContainer}>
       <h1 className={styles.authTitle}>{isLogin ? 'Login' : 'Sign Up'}</h1>
+      <SiAdguard className={styles.icon} />
       <form className={styles.authForm}>
         <input
           type="email"
           placeholder="Email"
           className={styles.authInput}
           required
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-          title="有効なメールアドレスを入力してください"
+          pattern={UserAuthentication.emailValidationReg}
         />
-        {isLogin && (
-          <input
-            type="password"
-            placeholder="Password"
-            className={styles.authInput}
-            required
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}"
-            title="大文字・小文字・数字・記号を含む8文字以上のパスワードを入力してください"
-          />
-        )}
+        <input
+          type="password"
+          placeholder="Password"
+          className={styles.authInput}
+          required
+          pattern={UserAuthentication.passwordValidationReg}
+        />
         <button type="submit" className={styles.authButton}>
           {isLogin ? 'Login' : 'Sign Up'}
         </button>
