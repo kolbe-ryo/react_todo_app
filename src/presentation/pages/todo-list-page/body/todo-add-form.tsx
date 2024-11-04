@@ -40,7 +40,7 @@ export const TodoAddForm = () => {
                     onChange={(e) => setDescription(e.target.value)}
                     className={styles.inputDescription}
                 />
-                <button type="submit" className={styles.button}>Submit</button>
+                <button type="submit" className={styles.button}>追加</button>
             </form>
         </div>
     );

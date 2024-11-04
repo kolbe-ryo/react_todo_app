@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Todo } from "../../../domain/todo/todo";
 import { IoCloseSharp } from "react-icons/io5";
-import { RxUpdate } from "react-icons/rx";
 import styles from "./todo-modal.module.css";
 
 type ModalProps = {
@@ -25,25 +24,26 @@ const Modal: React.FC<ModalProps> = ({ todo, onClose, onUpdate }) => {
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <h3>{todo.getTitle()}</h3>
-        <div className={styles.formGroup}>
-          <label htmlFor="title">Title</label>
+        <form onSubmit={onUpdateTodo} className={styles.form}>
           <input
             type="text"
-            id="title"
+            placeholder="タイトル"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            className={styles.inputTitle}
+            required
+            pattern=".*[^\s]+.*"
+            title="タイトルは空白は禁止されています"
           />
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
+          <input
+            type="text"
+            placeholder="説明"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            className={styles.inputDescription}
           />
-        </div>
-        <p className={styles.description}>{todo.getDescription()}</p>
-        <RxUpdate className={styles.update} onClick={onUpdateTodo} />
+          <button type="submit" className={styles.button}>更新</button>
+        </form>
         <IoCloseSharp className={styles.close} onClick={onClose} />
       </div>
     </div>

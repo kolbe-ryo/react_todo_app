@@ -33,21 +33,51 @@ h3 {
   color: orange;
 }
 
-p {
-  color: #888;
+.formArea {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.inputTitle {
+  width: 20%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
   font-size: 12px;
 }
 
-.description {
-  padding-bottom: 16px;
+.inputDescription {
+  width: 60%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  font-size: 12px;
 }
 
-.createdAt {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  padding: 0 16px 16px 0;
-  margin: 0;
+.button {
+  width: 20%;
+  background-color: orange;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: rgb(253, 104, 50);
 }
 
 .close {
@@ -63,19 +93,4 @@ p {
 
 .close:hover {
   color: #f00;
-}
-
-.update {
-  background: none;
-  border: none;
-  color: #888;
-  cursor: pointer;
-  position: absolute;
-  top: 15px;
-  right: 45px;
-  font-size: 20px;
-}
-
-.update:hover {
-  color: rgb(0, 242, 255);
 }
