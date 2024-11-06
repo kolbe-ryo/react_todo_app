@@ -5,7 +5,7 @@ import { supabase } from "./client";
 export class SupabaseTodoRepository implements ITodoRepository {
 
     public async findAll(): Promise<Todo[]> {
-        const { data , error } = await supabase
+        const { data, error } = await supabase
             .from('todo')
             .select()
 
@@ -23,23 +23,45 @@ export class SupabaseTodoRepository implements ITodoRepository {
         )) ?? [];
     }
 
-    // TODO 実装する
     public async update(todo: Todo): Promise<Todo[]> {
-        // todosの中からidが一致するものを探し、更新する
-        // this.todos = this.todos.map(oldTodo => oldTodo.getId() === todo.getId() ? todo : oldTodo);
-        // return this.todos;
-        throw new Error("Method not implemented.");
+        // updateの実装
+        const { error } = await supabase
+            .from('todo')
+            .update({ title: todo.getTitle(), description: todo.getDescription() })
+            .eq('id', todo.getId());
+
+        // TODO: エラーハンドリング
+        if (error) {
+            throw error;
+        }
+
+        return await this.findAll();
     }
 
     public async save(title: string, description: string): Promise<Todo[]> {
-        // this.todos.push(todo);
-        // return this.todos;
-        throw new Error("Method not implemented.");
+        const { error } = await supabase
+            .from('todo')
+            .insert({ title: title, description: description });
+
+        // TODO: エラーハンドリング
+        if (error) {
+            throw error;
+        }
+
+        return await this.findAll();
     }
 
     public async delete(id: string): Promise<Todo[]> {
-        // this.todos = this.todos.filter(todo => todo.getId() !== id);
-        // return this.todos;
-        throw new Error("Method not implemented.");
+        const { error } = await supabase
+            .from('todo')
+            .delete()
+            .eq('id', id);
+
+        // TODO: エラーハンドリング
+        if (error) {
+            throw error;
+        }
+
+        return await this.findAll();
     }
 }
