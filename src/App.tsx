@@ -6,32 +6,34 @@ import LoginPage from "./presentation/pages/authentication/login/login";
 import { useEffect, useState } from "react";
 import { supabase } from "./infrastructure/remote/client";
 import { Session } from "@supabase/supabase-js";
+import { AuthState } from "./application/state/auth-state";
 
 function App() {
   const [session, setSession] = useState<Session | null>(null);
+  const authState = AuthState.getInstance();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session)
-    })
+    });
 
     supabase.auth.onAuthStateChange((_, session) => {
-      setSession(session)
+      setSession(session);
+      console.log(!session);
+      authState.setUserId();
     })
-  }, [])
+  }, []);
 
   return (
     <div>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/" element={session ? <TodoListPage /> : <Navigate replace to="/login" />} />
-        
-        {/* <Route path="/" element={<TodoListPage />} /> */}
+        <Route path="/" element={!session ? <LoginPage /> : <TodoListPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
-  )
+  );
 }
 
 export default App;

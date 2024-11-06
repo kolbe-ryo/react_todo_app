@@ -1,8 +1,16 @@
+import { AuthState } from "../../application/state/auth-state";
 import { Todo } from "../../domain/todo/todo";
 import { ITodoRepository } from "../../domain/todo/todo-repository";
 import { supabase } from "./client";
 
 export class SupabaseTodoRepository implements ITodoRepository {
+
+    // userIdを取得するためのAuthStateインスタンスを保持
+    private authState: AuthState;
+
+    constructor() {
+        this.authState = AuthState.getInstance();
+    }
 
     public async findAll(): Promise<Todo[]> {
         const { data, error } = await supabase
@@ -30,7 +38,7 @@ export class SupabaseTodoRepository implements ITodoRepository {
             .update({ 
                 title: todo.getTitle(), 
                 description: todo.getDescription(),
-                userId: (await supabase.auth.getUser()).data.user?.id,
+                userId: this.authState.getUserId(),
              })
             .eq('id', todo.getId());
 
@@ -48,7 +56,7 @@ export class SupabaseTodoRepository implements ITodoRepository {
             .insert({ 
                 title: title, 
                 description: description,
-                userId: (await supabase.auth.getUser()).data.user?.id,
+                userId: this.authState.getUserId(),
              });
 
         // TODO: エラーハンドリング
