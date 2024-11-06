@@ -15,12 +15,13 @@ function App() {
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session)
+      authState.setUserId(data?.session?.user.id);
     });
 
     supabase.auth.onAuthStateChange((_, session) => {
       setSession(session);
       console.log(!session);
-      authState.setUserId();
+      authState.setUserId(session?.user?.id);
     })
   }, []);
 

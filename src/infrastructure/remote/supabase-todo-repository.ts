@@ -12,10 +12,12 @@ export class SupabaseTodoRepository implements ITodoRepository {
         this.authState = AuthState.getInstance();
     }
 
-    public async findAll(): Promise<Todo[]> {
+    public async fetchAll(): Promise<Todo[]> {
         const { data, error } = await supabase
             .from('todo')
             .select()
+            .eq('userId', this.authState.getUserId())
+            .order('createdAt', { ascending: false });
 
         // TODO: エラーハンドリング
         if (error) {
@@ -47,7 +49,7 @@ export class SupabaseTodoRepository implements ITodoRepository {
             throw error;
         }
 
-        return await this.findAll();
+        return await this.fetchAll();
     }
 
     public async save(title: string, description: string): Promise<Todo[]> {
@@ -65,7 +67,7 @@ export class SupabaseTodoRepository implements ITodoRepository {
             throw error;
         }
 
-        return await this.findAll();
+        return await this.fetchAll();
     }
 
     public async delete(id: string): Promise<Todo[]> {
@@ -79,6 +81,6 @@ export class SupabaseTodoRepository implements ITodoRepository {
             throw error;
         }
 
-        return await this.findAll();
+        return await this.fetchAll();
     }
 }

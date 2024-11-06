@@ -1,7 +1,7 @@
 import { supabase } from '../../infrastructure/remote/client';
 
 export class AuthState {
-    private userId: string | undefined;
+    private userId: string = '';
 
     private static instance: AuthState | null = null;
 
@@ -14,16 +14,11 @@ export class AuthState {
         return this.instance;
     }
 
-    public getUserId(): string | undefined {
+    public getUserId(): string {
         return this.userId;
     }
 
-    public async setUserId(): Promise<void> {
-        const { data, error } = await supabase.auth.getUser();
-        if (error) {
-            throw error;
-        }
-        console.log(data);
-        this.userId = data.user?.id ?? null;
+    public setUserId(userId: string | undefined): void {
+        this.userId = userId ?? '';
     }
 }

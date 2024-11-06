@@ -18,7 +18,7 @@ export class MockTodoRepository implements ITodoRepository {
         new Todo("13", "Todo 13", "Description 13", new Date(), "user13"),
     ];
 
-    public async findAll(): Promise<Todo[]> {
+    public async fetchAll(): Promise<Todo[]> {
         return this.todos;
     }
 
