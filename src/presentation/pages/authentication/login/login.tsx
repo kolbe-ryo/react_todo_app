@@ -53,7 +53,7 @@ export const LoginPage = () => {
                 </button>
             </form>
             <button onClick={() => navigate('/signup')} className={styles.toggleButton}>
-                "アカウントをお持ちでないですか？"
+                アカウントをお持ちでないですか？
             </button>
         </div>
     );

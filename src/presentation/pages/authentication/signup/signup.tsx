@@ -56,7 +56,7 @@ export const SignUpPage = () => {
                 </button>
             </form>
             <button onClick={() => navigate('/login')} className={styles.toggleButton}>
-                "すでにアカウントをお持ちですか？"
+                すでにアカウントをお持ちですか？
             </button>
         </div>
     );
