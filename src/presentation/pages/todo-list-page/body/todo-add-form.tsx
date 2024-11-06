@@ -19,7 +19,7 @@ export const TodoAddForm = () => {
         dispatch(todosReducer(todos));
         setTitle("");
         setDescription("");
-    }
+    };
 
     return (
         <div className={styles.formArea}>

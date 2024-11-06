@@ -27,7 +27,11 @@ export class SupabaseTodoRepository implements ITodoRepository {
         // updateの実装
         const { error } = await supabase
             .from('todo')
-            .update({ title: todo.getTitle(), description: todo.getDescription() })
+            .update({ 
+                title: todo.getTitle(), 
+                description: todo.getDescription(),
+                userId: (await supabase.auth.getUser()).data.user?.id,
+             })
             .eq('id', todo.getId());
 
         // TODO: エラーハンドリング
@@ -41,10 +45,15 @@ export class SupabaseTodoRepository implements ITodoRepository {
     public async save(title: string, description: string): Promise<Todo[]> {
         const { error } = await supabase
             .from('todo')
-            .insert({ title: title, description: description });
+            .insert({ 
+                title: title, 
+                description: description,
+                userId: (await supabase.auth.getUser()).data.user?.id,
+             });
 
         // TODO: エラーハンドリング
         if (error) {
+            console.log(error);
             throw error;
         }
 
