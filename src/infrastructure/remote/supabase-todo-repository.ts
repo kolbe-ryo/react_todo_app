@@ -4,7 +4,6 @@ import { supabase } from "./client";
 
 export class SupabaseTodoRepository implements ITodoRepository {
 
-    // TODO 実装する
     public async findAll(): Promise<Todo[]> {
         const { data , error } = await supabase
             .from('todo')
@@ -24,6 +23,7 @@ export class SupabaseTodoRepository implements ITodoRepository {
         )) ?? [];
     }
 
+    // TODO 実装する
     public async update(todo: Todo): Promise<Todo[]> {
         // todosの中からidが一致するものを探し、更新する
         // this.todos = this.todos.map(oldTodo => oldTodo.getId() === todo.getId() ? todo : oldTodo);
