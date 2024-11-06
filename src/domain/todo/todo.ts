@@ -6,8 +6,9 @@ export class Todo {
     private title: string;
     private description: string;
     private createdAt: Date;
+    private userId: string;
 
-    constructor(id: string ,title: string, description: string | null, createdAt: Date) {
+    constructor(id: string ,title: string, description: string | null, createdAt: Date, userId: string) {
         if (!title) {
             throw new ErrorWithMessage("入力が不正です", "タイトルは必須です");
         }
@@ -15,6 +16,7 @@ export class Todo {
         this.title = title;
         this.description = description ?? "";
         this.createdAt = createdAt;
+        this.userId = userId;
     }
 
     public getId(): string {
@@ -33,6 +35,10 @@ export class Todo {
         return this.createdAt;
     }
 
+    public getUserId(): string | null {
+        return this.userId;
+    }
+
     public updateTitle(title: string): this {
         this.title = title;
         return this;
@@ -45,16 +51,20 @@ export class Todo {
 
     public toJson(): string {
         return JSON.stringify({
-            id: this.id,
             title: this.title,
             description: this.description,
-            createdAt: this.createdAt
         });
     }
 
     public static fromJson(json: string): Todo {
         const todo = JSON.parse(json);
-        return new Todo(todo.id, todo.title, todo.description, new Date(todo.createdAt));
+        return new Todo(
+            todo.id, 
+            todo.title, 
+            todo.description, 
+            new Date(todo.createdAt), 
+            todo.userId
+        );
     }
 
     public static titleValidationReg: string = '.*[^s]+.*';
