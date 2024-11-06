@@ -48,6 +48,10 @@
   background-color: rgb(253, 104, 50);
 }
 
+.authButton:disabled{
+  background-color: #ccc;
+}
+
 .toggleButton {
   background: none;
   border: none;

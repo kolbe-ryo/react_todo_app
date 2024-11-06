@@ -5,5 +5,5 @@ import { IAuthenticationRepository } from "../domain/authentication/authenticati
 import { SupabaseTodoRepository } from "./remote/supabase-todo-repository";
 
 // DIするrepository object
-// export const TodoContext = createContext<ITodoRepository>(new SupabaseTodoRepository());
-export const TodoContext = createContext<ITodoRepository>(new MockTodoRepository());
+export const TodoContext = createContext<ITodoRepository>(new SupabaseTodoRepository());
+// export const TodoContext = createContext<ITodoRepository>(new MockTodoRepository());
