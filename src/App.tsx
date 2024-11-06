@@ -1,32 +1,40 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import TodoListPage from './presentation/pages/todo-list-page/todo-list-page';
 import NotFoundPage from "./presentation/pages/not-found/not-found-page";
-import { SignUpPage } from "./presentation/pages/authentication/signup";
-import LoginPage from "./presentation/pages/authentication/login";
-import { useEffect } from "react";
+import { SignUpPage } from "./presentation/pages/authentication/signup/signup";
+import LoginPage from "./presentation/pages/authentication/login/login";
+import { useEffect, useState } from "react";
+import { supabase } from "./infrastructure/remote/client";
+import { Session } from "@supabase/supabase-js";
+import { AuthState } from "./application/state/auth-state";
 
 function App() {
-  // const navigate = useNavigate();
+  const [session, setSession] = useState<Session | null>(null);
+  const authState = AuthState.getInstance();
 
-  // useEffect(() => {
-  //   const session = sessionStorage.getItem('session');
-  //   if (session) {
-  //     navigate('/');
-  //   } else {
-  //     navigate('/login');
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session)
+      authState.setUserId(data?.session?.user.id);
+    });
+
+    supabase.auth.onAuthStateChange((_, session) => {
+      setSession(session);
+      console.log(!session);
+      authState.setUserId(session?.user?.id);
+    })
+  }, []);
 
   return (
     <div>
       <Routes>
-        <Route path="/" element={<TodoListPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="*" element={ <NotFoundPage /> } /> 
+        <Route path="/" element={!session ? <LoginPage /> : <TodoListPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
-  )
+  );
 }
 
 export default App;

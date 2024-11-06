@@ -10,7 +10,7 @@ export class TodoUsecase {
     }
 
     async fetchTodos(): Promise<Todo[]> {
-        return this.todoRepository.findAll();
+        return this.todoRepository.fetchAll();
     }
 
     async updateTodo(todo: Todo): Promise<Todo[]> {
@@ -18,8 +18,7 @@ export class TodoUsecase {
     }
 
     async addTodo(title: string, description: string): Promise<Todo[]> {
-        const todo = new Todo(title, description);
-        return this.todoRepository.save(todo);
+        return this.todoRepository.save(title, description);
     }
 
     async removeTodo(id: string): Promise<Todo[]> {
