@@ -1,5 +1,9 @@
 
 version: 0.2
+env:
+  variables:
+    REACT_APP_SUPABASE_URL: $PROJECT_URL
+    REACT_APP_SUPABASE_ANON_KEY: $ANON_KEY
 phases:
     install:
         commands:
@@ -9,8 +13,6 @@ phases:
             - npm ci
     build:
         commands:
-            - echo REACT_APP_SUPABASE_URL=$PROJECT_URL >> ./src/.env
-            - echo REACT_APP_SUPABASE_ANON_KEY=$ANON_KEY >> ./src/.env
             - npm run build
 artifacts:
     base-directory: build
