@@ -53,10 +53,10 @@
                         "$ref": "#/parameters/rowFilter.todo.description"
                     },
                     {
-                        "$ref": "#/parameters/rowFilter.todo.user_id"
+                        "$ref": "#/parameters/rowFilter.todo.userId"
                     },
                     {
-                        "$ref": "#/parameters/rowFilter.todo.created_at"
+                        "$ref": "#/parameters/rowFilter.todo.createdAt"
                     },
                     {
                         "$ref": "#/parameters/select"
@@ -133,10 +133,10 @@
                         "$ref": "#/parameters/rowFilter.todo.description"
                     },
                     {
-                        "$ref": "#/parameters/rowFilter.todo.user_id"
+                        "$ref": "#/parameters/rowFilter.todo.userId"
                     },
                     {
-                        "$ref": "#/parameters/rowFilter.todo.created_at"
+                        "$ref": "#/parameters/rowFilter.todo.createdAt"
                     },
                     {
                         "$ref": "#/parameters/preferReturn"
@@ -164,10 +164,10 @@
                         "$ref": "#/parameters/rowFilter.todo.description"
                     },
                     {
-                        "$ref": "#/parameters/rowFilter.todo.user_id"
+                        "$ref": "#/parameters/rowFilter.todo.userId"
                     },
                     {
-                        "$ref": "#/parameters/rowFilter.todo.created_at"
+                        "$ref": "#/parameters/rowFilter.todo.createdAt"
                     },
                     {
                         "$ref": "#/parameters/body.todo"
@@ -194,7 +194,8 @@
             "required": [
                 "id",
                 "title",
-                "created_at"
+                "userId",
+                "createdAt"
             ],
             "properties": {
                 "id": {
@@ -211,12 +212,12 @@
                     "format": "text",
                     "type": "string"
                 },
-                "user_id": {
+                "userId": {
                     "default": "gen_random_uuid()",
                     "format": "uuid",
                     "type": "string"
                 },
-                "created_at": {
+                "createdAt": {
                     "default": "now()",
                     "format": "timestamp with time zone",
                     "type": "string"
@@ -349,14 +350,14 @@
             "in": "query",
             "type": "string"
         },
-        "rowFilter.todo.user_id": {
-            "name": "user_id",
+        "rowFilter.todo.userId": {
+            "name": "userId",
             "required": false,
             "in": "query",
             "type": "string"
         },
-        "rowFilter.todo.created_at": {
-            "name": "created_at",
+        "rowFilter.todo.createdAt": {
+            "name": "createdAt",
             "required": false,
             "in": "query",
             "type": "string"

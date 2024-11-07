@@ -16,9 +16,8 @@ export const GridViewList = () => {
     const todos = useSelector((state: RootState) => state.todos.value);
 
     // 選択されたTodoを管理するstate
-    // todoが選択されたかどうかはNullか否かで判断する
+    // todoが選択されたかどうかはnullか否かで判断する
     const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
-
 
     const fetchTodos = async (): Promise<void> => {
         const todos = await usecase.fetchTodos();

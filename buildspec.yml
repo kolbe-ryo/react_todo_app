@@ -1,15 +1,19 @@
 
 version: 0.2
-env:
-  variables:
-    REACT_APP_SUPABASE_URL: $PROJECT_URL
-    REACT_APP_SUPABASE_ANON_KEY: $ANON_KEY
+# env:
+#   variables:
+#     REACT_APP_SUPABASE_URL: $PROJECT_URL
+#     REACT_APP_SUPABASE_ANON_KEY: $ANON_KEY
 phases:
     install:
         commands:
             - npm install
     pre_build:
         commands:
+            - echo "Setting up environment variables"
+            # envセクションの環境変数を .env ファイルに書き出す
+            - echo "REACT_APP_API_URL=$REACT_APP_API_URL" > .env
+            - echo "REACT_APP_ENVIRONMENT=$REACT_APP_ENVIRONMENT" >> .env
             - npm ci
     build:
         commands:
