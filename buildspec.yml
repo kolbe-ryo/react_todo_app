@@ -7,7 +7,7 @@ env:
 phases:
     install:
         commands:
-            - npm install @appbaseio/reactivesearch
+            - npm install
     pre_build:
         commands:
             - npm ci
