@@ -28,6 +28,7 @@ function App() {
       setSession(session);
       authState.setUserId(session?.user?.id);
       setLoading(false);
+      console.log(session);
       navigate('/');
     });
   }, []);
