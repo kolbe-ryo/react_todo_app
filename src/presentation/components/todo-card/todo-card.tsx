@@ -20,7 +20,7 @@ const TodoCard: React.FC<TodoCardProps> = ({ todo, onTap }) => {
 
   const createdAt = formatDateToYYYYMMDDHHMM(todo.getCreatedAt());
 
-  const onDeleteTodoNoPropagation = async (event: any): Promise<void> => {
+  const onDeleteTodoNoPropagation = async (event: React.MouseEvent<SVGElement>): Promise<void> => {
     event.stopPropagation();
     console.log(todo.getId());
     const todos = await usecase.removeTodo(todo.getId());

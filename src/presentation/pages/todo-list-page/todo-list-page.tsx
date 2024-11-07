@@ -1,5 +1,6 @@
+import React from "react";
 import { TodoListPageHeader } from "./header/todo-list-header";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { TodoContext } from "../../../infrastructure/di";
 import TodoAddForm from "./body/todo-add-form";
 import GridViewList from "./body/grid-view-list";

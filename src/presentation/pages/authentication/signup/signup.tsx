@@ -1,9 +1,9 @@
+import React, { useState } from 'react';
 import { SiAdguard } from "react-icons/si";
-import { UserAuthentication } from '../../../../domain/authentication/user-auth';
 import { useNavigate } from 'react-router-dom';
-import styles from './signup.module.css';
-import { useState } from "react";
+import { UserAuthentication } from '../../../../domain/authentication/user-auth';
 import { supabase } from "../../../../infrastructure/remote/client";
+import styles from './signup.module.css';
 
 export const SignUpPage = () => {
     const [loading, setLoading] = useState(false)

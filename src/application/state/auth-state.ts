@@ -1,4 +1,3 @@
-import { supabase } from '../../infrastructure/remote/client';
 
 export class AuthState {
     private userId: string = '';

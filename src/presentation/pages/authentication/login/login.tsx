@@ -1,33 +1,31 @@
+import React from 'react';
 import { SiAdguard } from "react-icons/si";
-import { UserAuthentication } from '../../../../domain/authentication/user-auth';
-import { useNavigate } from 'react-router-dom';
 import styles from './login.module.css';
 import { supabase } from "../../../../infrastructure/remote/client";
-import { useState } from "react";
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 
 export const LoginPage = () => {
-    const [loading, setLoading] = useState(false)
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const navigate = useNavigate();
+    // const [loading, setLoading] = useState(false)
+    // const [email, setEmail] = useState("");
+    // const [password, setPassword] = useState("");
+    // const navigate = useNavigate();
 
     // emailとpasswordのフォームから入力を受け取り、サインアップ処理を行う
-    const login = async (e: React.FormEvent): Promise<void> => {
-        e.preventDefault();
-        setLoading(true);
-        const { error } = await supabase.auth.signInWithPassword({ email, password })
+    // const login = async (e: React.FormEvent): Promise<void> => {
+    //     e.preventDefault();
+    //     setLoading(true);
+    //     const { error } = await supabase.auth.signInWithPassword({ email, password })
 
-        // TODO: エラー処理を追加する
-        if (error) {
-            alert(error.cause || error.message)
-        } else {
-            alert('ログインに成功しました。')
-        }
-        setLoading(false);
-        navigate('/');
-    }
+    //     // TODO: エラー処理を追加する
+    //     if (error) {
+    //         alert(error.cause || error.message)
+    //     } else {
+    //         alert('ログインに成功しました。')
+    //     }
+    //     setLoading(false);
+    //     navigate('/');
+    // }
 
     return (
         <div className={styles.authContainer}>
