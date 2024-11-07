@@ -1,0 +1,21 @@
+
+version: 0.2
+phases:
+    install:
+        commands:
+            - npm install @appbaseio/reactivesearch
+    pre_build:
+        commands:
+            - npm ci
+    build:
+        commands:
+            - echo REACT_APP_SUPABASE_URL=$PROJECT_URL >> ./src/.env
+            - echo REACT_APP_SUPABASE_ANON_KEY=$ANON_KEY >> ./src/.env
+            - npm run build
+artifacts:
+    base-directory: build
+    files:
+        - '**/*'
+cache:
+    paths:
+        - node_modules/**/*
