@@ -12,8 +12,8 @@ phases:
         commands:
             - echo "Setting up environment variables"
             # envセクションの環境変数を .env ファイルに書き出す
-            - echo "REACT_APP_API_URL=${REACT_APP_API_URL}" > .env
-            - echo "REACT_APP_ENVIRONMENT=${REACT_APP_ENVIRONMENT}" >> .env
+            - echo "REACT_APP_SUPABASE_URL=${REACT_APP_SUPABASE_URL}" > .env
+            - echo "REACT_APP_SUPABASE_ANON_KEY=${REACT_APP_SUPABASE_ANON_KEY}" >> .env
             - npm ci
     build:
         commands:
