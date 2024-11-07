@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import styles from './login.module.css';
 import { supabase } from "../../../../infrastructure/remote/client";
 import { useState } from "react";
+import { Auth } from '@supabase/auth-ui-react'
+import { ThemeSupa } from '@supabase/auth-ui-shared'
 
 export const LoginPage = () => {
     const [loading, setLoading] = useState(false)
@@ -31,7 +33,8 @@ export const LoginPage = () => {
         <div className={styles.authContainer}>
             <h1 className={styles.authTitle}>Login</h1>
             <SiAdguard className={styles.icon} />
-            <form onSubmit={login} className={styles.authForm}>
+            {/* 自前で用意したけど、Google認証などはSupabaseの用意したComponentの方が良かったので使わない */}
+            {/* <form onSubmit={login} className={styles.authForm}>
                 <input
                     type="email"
                     placeholder="Email"
@@ -54,8 +57,14 @@ export const LoginPage = () => {
             </form>
             <button onClick={() => navigate('/signup')} className={styles.toggleButton}>
                 アカウントをお持ちでないですか？
-            </button>
+            </button> */}
+            <Auth
+                supabaseClient={supabase}
+                appearance={{ theme: ThemeSupa }}
+                providers={['google']}
+            />
         </div>
+
     );
 };
 

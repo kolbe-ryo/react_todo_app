@@ -9,14 +9,14 @@
 
 .authTitle {
   font-size: 24px;
-  color: orange;
+  color:  rgb(52, 195, 132);
   margin-bottom: 1rem;
 }
 
 .icon {
   margin: 50px 0;
   font-size: 60px;
-  color: orange;
+  color: rgb(52, 195, 132);
 }
 
 .authForm {
