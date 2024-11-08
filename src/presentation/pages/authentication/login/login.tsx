@@ -1,9 +1,8 @@
-import React from 'react';
+import { Auth } from '@supabase/auth-ui-react';
+import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { SiAdguard } from "react-icons/si";
-import styles from './login.module.css';
 import { supabase } from "../../../../infrastructure/remote/client";
-import { Auth } from '@supabase/auth-ui-react'
-import { ThemeSupa } from '@supabase/auth-ui-shared'
+import styles from './login.module.css';
 
 export const LoginPage = () => {
     // const [loading, setLoading] = useState(false)
@@ -32,6 +31,7 @@ export const LoginPage = () => {
             <h1 className={styles.authTitle}>Login</h1>
             <SiAdguard className={styles.icon} />
             {/* 自前で用意したけど、Google認証などはSupabaseの用意したComponentの方が良かったので使わない */}
+            {/* SMTPの設定をGmailで行う：https://zenn.dev/ryohei0509/articles/d75abe518f9d46 */}
             {/* <form onSubmit={login} className={styles.authForm}>
                 <input
                     type="email"
