@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { Todo } from "../../../../domain/todo/todo";
-import { TodoUsecase } from "../../../../application/usecase/todo/todo-usecase";
-import { TodoContext } from "../../../../infrastructure/di";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../../redux/store";
 import { todosReducer } from "../../../../application/state/todo-state";
+import { TodoUsecase } from "../../../../application/usecase/todo/todo-usecase";
+import { Todo } from "../../../../domain/todo/todo";
+import { TodoContext } from "../../../../infrastructure/di";
+import { RootState } from "../../../../redux/store";
 import TodoCard from '../../../components/todo-card/todo-card';
 import Modal from "../../../components/todo-modal/todo-modal";
 import styles from './grid-view-list.module.css';

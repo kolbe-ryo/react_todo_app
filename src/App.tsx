@@ -1,16 +1,15 @@
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
-import TodoListPage from './presentation/pages/todo-list-page/todo-list-page';
-import NotFoundPage from "./presentation/pages/not-found/not-found-page";
-import { SignUpPage } from "./presentation/pages/authentication/signup/signup";
-import LoginPage from "./presentation/pages/authentication/login/login";
-import { useEffect, useState } from "react";
-import { supabase } from "./infrastructure/remote/client";
-import { Session } from "@supabase/supabase-js";
-import { AuthState } from "./application/state/auth-state";
-import { GoStopwatch } from "react-icons/go";
-import styles from './App.module.css';
 import { Player } from "@lottiefiles/react-lottie-player";
+import { Session } from "@supabase/supabase-js";
+import { useEffect, useState } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import styles from './App.module.css';
+import { AuthState } from "./application/state/auth-state";
 import pageNotFoundAnimation from './asset/animations/404.json';
+import { supabase } from "./infrastructure/remote/client";
+import LoginPage from "./presentation/pages/authentication/login/login";
+import { SignUpPage } from "./presentation/pages/authentication/signup/signup";
+import NotFoundPage from "./presentation/pages/not-found/not-found-page";
+import TodoListPage from './presentation/pages/todo-list-page/todo-list-page';
 
 function App() {
   const [session, setSession] = useState<Session | null>(null);
@@ -34,9 +33,9 @@ function App() {
   }, []);
 
   // TODO: Widgetの分離
+  // TODO アニメーションを変更する
   if (loading) {
     return <div className={styles.container}>
-      // TODO アニメーションを変更する
       <Player
         autoplay
         loop

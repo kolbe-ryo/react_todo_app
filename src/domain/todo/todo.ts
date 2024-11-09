@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { ErrorWithMessage } from "../../error/error";
 
 export class Todo {

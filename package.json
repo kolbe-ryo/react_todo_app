@@ -30,14 +30,20 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint .",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
+    "postinstall": "typesync",
     "type-check": "tsc --noEmit"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "react/jsx-uses-react": "off",
+      "react/react-in-jsx-scope": "off"
+    }
   },
   "browserslist": {
     "production": [
@@ -53,7 +59,15 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@eslint/js": "^9.14.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/eslint": "~9.6.1",
     "@types/uuid": "^10.0.0",
-    "eslint": "^8.57.1"
+    "eslint": "^8.57.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-react": "^7.37.2",
+    "globals": "^15.12.0",
+    "typescript-eslint": "^8.13.0",
+    "typesync": "^0.13.3"
   }
 }

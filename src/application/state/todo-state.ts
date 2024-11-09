@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Todo } from '../../domain/todo/todo'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Todo } from '../../domain/todo/todo';
 
 // Todoリストを管理するState
 export const todosSlice = createSlice({
