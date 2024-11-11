@@ -1,4 +1,3 @@
-import { ErrorWithMessage } from "../../error/error";
 
 export class Todo {
     private id: string;
@@ -7,9 +6,10 @@ export class Todo {
     private createdAt: Date;
     private userId: string;
 
-    constructor(id: string ,title: string, description: string | null, createdAt: Date, userId: string) {
+    constructor(id: string, title: string, description: string | null, createdAt: Date, userId: string) {
         if (!title) {
-            throw new ErrorWithMessage("入力が不正です", "タイトルは必須です");
+            // TODO: エラー処理を追加する
+            throw new Error("入力が不正です");
         }
         this.id = id;
         this.title = title;
@@ -58,10 +58,10 @@ export class Todo {
     public static fromJson(json: string): Todo {
         const todo = JSON.parse(json);
         return new Todo(
-            todo.id, 
-            todo.title, 
-            todo.description, 
-            new Date(todo.createdAt), 
+            todo.id,
+            todo.title,
+            todo.description,
+            new Date(todo.createdAt),
             todo.userId
         );
     }
