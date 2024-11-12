@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { SiAdguard } from "react-icons/si";
 import { useNavigate } from 'react-router-dom';
-import { UserAuthentication } from '../../../../domain/authentication/user-auth';
 import { supabase } from "../../../../infrastructure/remote/client";
 import styles from './signup.module.css';
 
@@ -41,7 +40,7 @@ export const SignUpPage = () => {
                     className={styles.authInput}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    pattern={UserAuthentication.emailValidationReg}
+                // pattern={UserAuthentication.emailValidationReg}
                 />
                 <input
                     type="password"
@@ -49,7 +48,7 @@ export const SignUpPage = () => {
                     className={styles.authInput}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    pattern={UserAuthentication.passwordValidationReg}
+                // pattern={UserAuthentication.passwordValidationReg}
                 />
                 <button type="submit" className={styles.authButton} disabled={loading}>
                     {loading ? 'Loading..' : 'Sign Up'}

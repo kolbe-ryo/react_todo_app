@@ -1,11 +1,9 @@
-import { Player } from "@lottiefiles/react-lottie-player";
 import { Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import styles from './App.module.css';
 import { AuthState } from "./application/state/auth-state";
-import pageNotFoundAnimation from './asset/animations/404.json';
 import { supabase } from "./infrastructure/remote/client";
+import { Loading } from "./presentation/components/loading/loading";
 import LoginPage from "./presentation/pages/authentication/login/login";
 import { SignUpPage } from "./presentation/pages/authentication/signup/signup";
 import NotFoundPage from "./presentation/pages/not-found/not-found-page";
@@ -32,27 +30,16 @@ function App() {
     });
   }, []);
 
-  // TODO: Widgetの分離
-  // TODO アニメーションを変更する
-  if (loading) {
-    return <div className={styles.container}>
-      <Player
-        autoplay
-        loop
-        src={pageNotFoundAnimation}
-        className={styles.animation}
-      />
-    </div>;
-  }
-
   return (
     <div>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/" element={!session ? <LoginPage /> : <TodoListPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <Loading loading={loading}>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/" element={!session ? <LoginPage /> : <TodoListPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Loading>
     </div>
   );
 }
