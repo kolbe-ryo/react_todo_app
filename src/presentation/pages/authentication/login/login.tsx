@@ -59,7 +59,7 @@ export const LoginPage = () => {
             <Auth
                 supabaseClient={supabase}
                 appearance={{ theme: ThemeSupa }}
-                providers={['google']}
+                providers={[]}
             />
         </div>
 
