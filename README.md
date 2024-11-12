@@ -15,16 +15,16 @@ URL：
 | Description | ログイン・サインアップを行う画面 | TODOアプリを提供する画面 |
 
 #### Authentication
-- Googleアカウント認証
 - Email認証
 
 #### TopPage
+- 取得：TODO一覧を取得・表示できます
 - 追加：タイトルと説明を入力し、TODOタスクを追加できます
 - 削除：不要になったTODOタスクを削除できます
 - 更新：TODOタスクの内容を変更できます
 
 ## 環境構成
-AWS Route53 + CloudFront + S3構成を構築する
+AWS Route53 + CloudFront + S3のアプリケーションを構築する
 
 ### 環境構成図
 ![env drawio](https://github.com/user-attachments/assets/2274aa11-3e88-49d8-b2e6-57c8ae54c93f)
@@ -39,8 +39,7 @@ API仕様は以下のディレクトリ内にjson形式で保存されていま�
 [supabase/api-spec.json](supabase/api-spec.json)
 
 ## アーキテクチャ
-
-![archtecture drawio](https://github.com/user-attachments/assets/b921bdc6-b2d4-48df-a180-8e28cbd83ac7)
+![archtecture drawio](https://github.com/user-attachments/assets/c1acef8e-3d19-42d2-883f-5552fe515b1f)
 
 ## 使用技術
 // TODO: reducerとかdiとか細かい技術について
