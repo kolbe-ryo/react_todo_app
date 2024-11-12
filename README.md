@@ -27,8 +27,7 @@ URL：
 AWS Route53 + CloudFront + S3構成を構築する
 
 ### 環境構成図
-// TODO：張り替え
-![環境構成図 drawio](https://github.com/user-attachments/assets/4ae8181d-3dd2-432a-8704-819652987a2e)
+![env drawio](https://github.com/user-attachments/assets/2274aa11-3e88-49d8-b2e6-57c8ae54c93f)
 
 ### CICD
 1. GithubのmasterブランチへのpushをトリガーにPipelineを開始
