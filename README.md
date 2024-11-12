@@ -8,7 +8,6 @@ URL：
 
 ### 機能
 // TODO: スクショ
-// TODO: 機能説明
 | Page | Authentiaction | TopPage |
 |--------|--------|--------|
 | View | Cell | Cell |
@@ -22,6 +21,20 @@ URL：
 - 追加：タイトルと説明を入力し、TODOタスクを追加できます
 - 削除：不要になったTODOタスクを削除できます
 - 更新：TODOタスクの内容を変更できます
+
+## 使用技術
+### フロントエンド
+- React
+- Redux
+- DI Context
+- CSS Modules
+
+### バックエンド・認証
+- Supabase
+- GCP（SMTPサーバー）
+
+### インフラ
+- AWS（CICD）
 
 ## 環境構成
 AWS Route53 + CloudFront + S3のアプリケーションを構築する
@@ -40,13 +53,6 @@ API仕様は以下のディレクトリ内にjson形式で保存されていま�
 
 ## アーキテクチャ
 ![archtecture drawio](https://github.com/user-attachments/assets/c1acef8e-3d19-42d2-883f-5552fe515b1f)
-
-## 使用技術
-// TODO: reducerとかdiとか細かい技術について
-- React
-- TypeScript
-- Supabase
-- CSS Modules
 
 ## ディレクトリ構成
 ```
