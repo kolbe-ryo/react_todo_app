@@ -27,6 +27,7 @@ URL：
 AWS Route53 + CloudFront + S3構成を構築する
 
 ### 環境構成図
+// TODO：張り替え
 ![環境構成図 drawio](https://github.com/user-attachments/assets/4ae8181d-3dd2-432a-8704-819652987a2e)
 
 ### CICD
