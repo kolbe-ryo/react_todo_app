@@ -13,7 +13,6 @@ export const LoginPage = () => {
     //     setLoading(true);
     //     const { error } = await supabase.auth.signInWithPassword({ email, password })
 
-    //     // TODO: エラー処理を追加する
     //     if (error) {
     //         alert(error.cause || error.message)
     //     } else {
@@ -23,7 +22,6 @@ export const LoginPage = () => {
     //     navigate('/');
     // }
 
-    // TODO: SignUpの時は文言入れ替え
     return (
         <div className={styles.authContainer}>
             {/* <h1 className={styles.authTitle}>Login</h1> */}

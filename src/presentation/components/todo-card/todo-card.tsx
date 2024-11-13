@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import styles from "./todo-card.module.css";
-import { Todo } from "../../../domain/todo/todo";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { formatDateToYYYYMMDDHHMM } from "../../../utils/time-format";
 import { useDispatch } from "react-redux";
-import { TodoUsecase } from "../../../application/usecase/todo/todo-usecase";
-import { TodoContext } from "../../../infrastructure/di";
 import { todosReducer } from "../../../application/state/todo-state";
+import { TodoUsecase } from "../../../application/usecase/todo/todo-usecase";
+import { Todo } from "../../../domain/todo/todo";
+import { TodoContext } from "../../../infrastructure/di";
+import { formatDateToYYYYMMDDHHMM } from "../../../utils/time-format";
+import styles from "./todo-card.module.css";
 
 type TodoCardProps = {
   todo: Todo;
@@ -30,6 +30,7 @@ const TodoCard: React.FC<TodoCardProps> = ({ todo, onTap }) => {
   return (
     <div className={styles.card} onClick={() => onTap(todo)}>
       <h3>{todo.getTitle()}</h3>
+      <p className={styles.status}>{todo.getStatus()}</p>
       <p className={styles.description}>{todo.getDescription()}</p>
       <p className={styles.createdAt}>{createdAt}</p>
       <RiDeleteBin6Line className={styles.deleteBin} onClick={onDeleteTodoNoPropagation} />

@@ -17,7 +17,6 @@ export const GridViewList = () => {
 
     // 選択されたTodoを管理するstate
     // todoが選択されたかどうかはnullか否かで判断する
-    // TODO: もしかするとIDだけでいいのかもしれない
     const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
 
     const fetchTodos = async (): Promise<void> => {
@@ -47,11 +46,12 @@ export const GridViewList = () => {
                 />
             ))}
             {/* // todoが選択された場合のみModalを表示する */}
-            {selectedTodo && (<Modal
-                todo={selectedTodo}
-                onClose={() => setSelectedTodo(null)}
-                onUpdate={updateTodo}
-            />)}
+            {selectedTodo &&
+                <Modal
+                    initialTodo={selectedTodo}
+                    onClose={() => setSelectedTodo(null)}
+                    onUpdate={updateTodo}
+                />}
         </div>
     );
 };
