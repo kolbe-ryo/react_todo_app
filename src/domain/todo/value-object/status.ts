@@ -10,9 +10,9 @@ export function getStatusColor(status: Status): string {
         case Status.todo:
             return "orange";
         case Status.progress:
-            return "skyblue";
+            return "lime";
         case Status.done:
-            return "cyan";
+            return "teal";
     }
 }
 

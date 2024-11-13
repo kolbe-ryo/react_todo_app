@@ -47,5 +47,5 @@ export default TodoCard;
 const Title = styled.h3<{ color: string }>`
   margin: 0;
   font-size: 1.2em;
-  color: ${({ color }) => color}.;
+  color: ${({ color }) => color};
 `;
