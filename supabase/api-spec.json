@@ -59,6 +59,9 @@
                         "$ref": "#/parameters/rowFilter.todo.createdAt"
                     },
                     {
+                        "$ref": "#/parameters/rowFilter.todo.status"
+                    },
+                    {
                         "$ref": "#/parameters/select"
                     },
                     {
@@ -139,6 +142,9 @@
                         "$ref": "#/parameters/rowFilter.todo.createdAt"
                     },
                     {
+                        "$ref": "#/parameters/rowFilter.todo.status"
+                    },
+                    {
                         "$ref": "#/parameters/preferReturn"
                     }
                 ],
@@ -170,6 +176,9 @@
                         "$ref": "#/parameters/rowFilter.todo.createdAt"
                     },
                     {
+                        "$ref": "#/parameters/rowFilter.todo.status"
+                    },
+                    {
                         "$ref": "#/parameters/body.todo"
                     },
                     {
@@ -195,7 +204,8 @@
                 "id",
                 "title",
                 "userId",
-                "createdAt"
+                "createdAt",
+                "status"
             ],
             "properties": {
                 "id": {
@@ -220,6 +230,10 @@
                 "createdAt": {
                     "default": "now()",
                     "format": "timestamp with time zone",
+                    "type": "string"
+                },
+                "status": {
+                    "format": "text",
                     "type": "string"
                 }
             },
@@ -358,6 +372,12 @@
         },
         "rowFilter.todo.createdAt": {
             "name": "createdAt",
+            "required": false,
+            "in": "query",
+            "type": "string"
+        },
+        "rowFilter.todo.status": {
+            "name": "status",
             "required": false,
             "in": "query",
             "type": "string"
