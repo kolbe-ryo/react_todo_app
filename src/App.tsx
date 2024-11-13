@@ -4,6 +4,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { AuthState } from "./application/state/auth-state";
 import { supabase } from "./infrastructure/remote/client";
 import { Loading } from "./presentation/components/loading/loading";
+import AuthPage from "./presentation/pages/authentication/auth";
 import LoginPage from "./presentation/pages/authentication/login/login";
 import { SignUpPage } from "./presentation/pages/authentication/signup/signup";
 import NotFoundPage from "./presentation/pages/not-found/not-found-page";
@@ -36,7 +37,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/" element={!session ? <LoginPage /> : <TodoListPage />} />
+          <Route path="/" element={!session ? <AuthPage /> : <TodoListPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Loading>
