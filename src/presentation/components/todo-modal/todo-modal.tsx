@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Todo } from "../../../domain/todo/todo";
 import { IoCloseSharp } from "react-icons/io5";
+import { Todo } from "../../../domain/todo/todo";
 import styles from "./todo-modal.module.css";
 
 type ModalProps = {
@@ -11,6 +11,7 @@ type ModalProps = {
 
 const Modal: React.FC<ModalProps> = ({ todo, onClose, onUpdate }) => {
 
+  // TODO: ここもあまり良くないかもしれないPropsをそのまま渡してはいけない
   const [title, setTitle] = useState(todo.getTitle());
   const [description, setDescription] = useState(todo.getDescription());
 

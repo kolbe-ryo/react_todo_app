@@ -17,6 +17,7 @@ export const GridViewList = () => {
 
     // 選択されたTodoを管理するstate
     // todoが選択されたかどうかはnullか否かで判断する
+    // TODO: もしかするとIDだけでいいのかもしれない
     const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
 
     const fetchTodos = async (): Promise<void> => {

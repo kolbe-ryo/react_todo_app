@@ -26,6 +26,7 @@ export const LoginPage = () => {
     //     navigate('/');
     // }
 
+    // TODO: SignUpの時は文言入れ替え
     return (
         <div className={styles.authContainer}>
             <h1 className={styles.authTitle}>Login</h1>
