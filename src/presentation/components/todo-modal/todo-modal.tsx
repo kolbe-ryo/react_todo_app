@@ -20,6 +20,7 @@ const Modal: React.FC<ModalProps> = ({ initialTodo, onClose, onUpdate }) => {
     onUpdate(updatedTodos);
   }
 
+  // TODO: コンポーネント分離を検討
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
