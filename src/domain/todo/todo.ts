@@ -16,7 +16,7 @@ export class Todo {
         this.id = id;
         this.title = title;
         this.description = description ?? "";
-        this.status = Status.todo;
+        this.status = status ?? Status.todo;
         this.createdAt = createdAt;
         this.userId = userId;
     }

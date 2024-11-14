@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { TodoContext } from "../../../infrastructure/di";
-import GridViewList from "./body/grid-view-list/grid-view-list";
+import StatusArea from "./body/status-area/status-area";
 import TodoAddForm from "./body/todo-add-form/todo-add-form";
 import { TodoListPageHeader } from "./header/todo-list-header";
 import styles from "./todo-list-page.module.css";
@@ -12,7 +12,8 @@ export const TodoListPage = () => {
       <div className={styles.space}>
         <TodoListPageHeader />
         <TodoAddForm />
-        <GridViewList />
+        {/* <GridViewList /> */}
+        <StatusArea />
       </div>
     </TodoContext.Provider>
   );

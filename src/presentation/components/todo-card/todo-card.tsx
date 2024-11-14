@@ -8,6 +8,7 @@ import { Todo } from "../../../domain/todo/todo";
 import { getStatusColor } from "../../../domain/todo/value-object/status";
 import { TodoContext } from "../../../infrastructure/di";
 import { formatDateToYYYYMMDDHHMM } from "../../../utils/time-format";
+import { Draggable } from "../draggable/draggable";
 import { StatusCard } from "./status-card/status-card";
 import styles from "./todo-card.module.css";
 
@@ -30,13 +31,17 @@ const TodoCard: React.FC<TodoCardProps> = ({ todo, onTap }) => {
     dispatch(todosReducer(todos));
   }
 
+  console.log('check status: ', todo.getStatus());
+
   return (
     <div className={styles.card} onClick={() => onTap(todo)}>
-      <Title color={getStatusColor(todo.getStatus())}>{todo.getTitle()}</Title>
-      <p className={styles.description}>{todo.getDescription()}</p>
-      <p className={styles.createdAt}>{createdAt}</p>
-      <StatusCard color={getStatusColor(todo.getStatus())}>{todo.getStatus()}</StatusCard>
-      <RiDeleteBin6Line className={styles.deleteBin} onClick={onDeleteTodoNoPropagation} />
+      <Draggable id={todo.getId()}>
+        <Title color={getStatusColor(todo.getStatus())}>{todo.getTitle()}</Title>
+        <p className={styles.description}>{todo.getDescription()}</p>
+        <p className={styles.createdAt}>{createdAt}</p>
+        <StatusCard color={getStatusColor(todo.getStatus())}>{todo.getStatus()}</StatusCard>
+        <RiDeleteBin6Line className={styles.deleteBin} onClick={onDeleteTodoNoPropagation} />
+      </Draggable>
     </div>
   );
 };
