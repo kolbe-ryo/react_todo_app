@@ -25,5 +25,6 @@ export default Droppable;
 
 const Wrapper = styled.p<{ isOver: boolean }>`
     max-width: 40%;
+    min-width: 220px;
     background-color: ${({ isOver }) => isOver ? 'rgb(240, 240, 240)' : 'white'};
 `;
