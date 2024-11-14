@@ -8,7 +8,7 @@ export enum Status {
 export function getStatusColor(status: Status): string {
     switch (status) {
         case Status.todo:
-            return "teal";
+            return "lightblue";
         case Status.progress:
             return "pink";
         case Status.done:

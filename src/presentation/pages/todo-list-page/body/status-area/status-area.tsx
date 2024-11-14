@@ -11,6 +11,7 @@ import { RootState } from '../../../../../redux/store';
 import Droppable from '../../../../components/droppable/droppable';
 import GridViewList from '../grid-view-list/grid-view-list';
 
+// TODO: コメント追加など行うこと
 export const StatusArea = () => {
     // DI
     const dispatch = useDispatch();

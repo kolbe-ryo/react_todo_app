@@ -31,7 +31,7 @@
 
 .button {
     width: 20%;
-    background-color: orange;
+    background-color: gray;
     color: white;
     border: none;
     border-radius: 4px;
@@ -42,5 +42,5 @@
 }
 
 .button:hover {
-    background-color: rgb(253, 104, 50);
+    background-color: rgb(52, 195, 132);
 }
