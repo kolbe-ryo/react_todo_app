@@ -63,6 +63,7 @@ export const StatusArea = () => {
         // eslint-disable-next-line
     }, []);
 
+    // TODO: 上部にそれぞれ何件のTODOがあるかつける
     return (
         <DndContext onDragEnd={onDragEnd} sensors={sensors}>
             <Stack direction="row" spacing={1} sx={{ justifyContent: "space-around" }}>

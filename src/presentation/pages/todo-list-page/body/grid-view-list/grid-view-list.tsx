@@ -14,6 +14,7 @@ type GridViewListProps = {
     status: Status;
 };
 
+// TODO: GridViewである必要なし。cssと命名の再検討
 export const GridViewList: FC<GridViewListProps> = ({ status }) => {
     // DI
     const dispatch = useDispatch();
