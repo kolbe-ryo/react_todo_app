@@ -20,7 +20,6 @@ export const SignUpPage = () => {
             password: password
         })
 
-        // TODO: エラー処理を追加する
         if (error) {
             alert(error.cause || error.message)
         } else {

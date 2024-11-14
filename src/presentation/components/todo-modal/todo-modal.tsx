@@ -1,29 +1,30 @@
 import React, { useState } from "react";
-import { Todo } from "../../../domain/todo/todo";
 import { IoCloseSharp } from "react-icons/io5";
+import { Todo } from "../../../domain/todo/todo";
 import styles from "./todo-modal.module.css";
 
 type ModalProps = {
-  todo: Todo;
+  initialTodo: Todo;
   onClose: () => void;
   onUpdate: (updatedTodo: Todo) => Promise<void>;
 };
 
-const Modal: React.FC<ModalProps> = ({ todo, onClose, onUpdate }) => {
+const Modal: React.FC<ModalProps> = ({ initialTodo, onClose, onUpdate }) => {
 
-  const [title, setTitle] = useState(todo.getTitle());
-  const [description, setDescription] = useState(todo.getDescription());
+  const [title, setTitle] = useState(initialTodo.getTitle());
+  const [description, setDescription] = useState(initialTodo.getDescription());
 
   const onUpdateTodo = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
-    const updatedTodos = todo.updateTitle(title).updateDescription(description);
+    const updatedTodos = initialTodo.updateTitle(title).updateDescription(description);
     onUpdate(updatedTodos);
   }
 
+  // TODO: コンポーネント分離を検討
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <h3>{todo.getTitle()}</h3>
+        <h3>{initialTodo.getTitle()}</h3>
         <form onSubmit={onUpdateTodo} className={styles.form}>
           <input
             type="text"

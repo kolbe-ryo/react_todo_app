@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
-import styles from "./todo-card.module.css";
-import { Todo } from "../../../domain/todo/todo";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { formatDateToYYYYMMDDHHMM } from "../../../utils/time-format";
 import { useDispatch } from "react-redux";
-import { TodoUsecase } from "../../../application/usecase/todo/todo-usecase";
-import { TodoContext } from "../../../infrastructure/di";
+import styled from "styled-components";
 import { todosReducer } from "../../../application/state/todo-state";
+import { TodoUsecase } from "../../../application/usecase/todo/todo-usecase";
+import { Todo } from "../../../domain/todo/todo";
+import { getStatusColor } from "../../../domain/todo/value-object/status";
+import { TodoContext } from "../../../infrastructure/di";
+import { formatDateToYYYYMMDDHHMM } from "../../../utils/time-format";
+import { StatusCard } from "./status-card/status-card";
+import styles from "./todo-card.module.css";
 
 type TodoCardProps = {
   todo: Todo;
@@ -29,12 +32,20 @@ const TodoCard: React.FC<TodoCardProps> = ({ todo, onTap }) => {
 
   return (
     <div className={styles.card} onClick={() => onTap(todo)}>
-      <h3>{todo.getTitle()}</h3>
+      <Title color={getStatusColor(todo.getStatus())}>{todo.getTitle()}</Title>
       <p className={styles.description}>{todo.getDescription()}</p>
       <p className={styles.createdAt}>{createdAt}</p>
+      <StatusCard color={getStatusColor(todo.getStatus())}>{todo.getStatus()}</StatusCard>
       <RiDeleteBin6Line className={styles.deleteBin} onClick={onDeleteTodoNoPropagation} />
     </div>
   );
 };
 
 export default TodoCard;
+
+
+const Title = styled.h3<{ color: string }>`
+  margin: 0;
+  font-size: 1.2em;
+  color: ${({ color }) => color};
+`;

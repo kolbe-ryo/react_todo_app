@@ -1,6 +1,7 @@
 import { AuthState } from "../../application/state/auth-state";
 import { Todo } from "../../domain/todo/todo";
 import { ITodoRepository } from "../../domain/todo/todo-repository";
+import Status from "../../domain/todo/value-object/status";
 import { supabase } from "./client";
 
 export class SupabaseTodoRepository implements ITodoRepository {
@@ -28,6 +29,7 @@ export class SupabaseTodoRepository implements ITodoRepository {
             todo.id,
             todo.title,
             todo.description,
+            Status[todo.status as keyof typeof Status],
             new Date(todo.createdAt),
             todo.userId
         )) ?? [];
@@ -37,11 +39,12 @@ export class SupabaseTodoRepository implements ITodoRepository {
         // updateの実装
         const { error } = await supabase
             .from('todo')
-            .update({ 
-                title: todo.getTitle(), 
+            .update({
+                title: todo.getTitle(),
                 description: todo.getDescription(),
+                status: todo.getStatus(),
                 userId: this.authState.getUserId(),
-             })
+            })
             .eq('id', todo.getId());
 
         // TODO: エラーハンドリング
@@ -55,11 +58,12 @@ export class SupabaseTodoRepository implements ITodoRepository {
     public async save(title: string, description: string): Promise<Todo[]> {
         const { error } = await supabase
             .from('todo')
-            .insert({ 
-                title: title, 
+            .insert({
+                title: title,
                 description: description,
+                status: Status.todo,
                 userId: this.authState.getUserId(),
-             });
+            });
 
         // TODO: エラーハンドリング
         if (error) {

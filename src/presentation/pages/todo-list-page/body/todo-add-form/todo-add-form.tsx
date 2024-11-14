@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
-import { todosReducer } from "../../../../application/state/todo-state";
-import { TodoUsecase } from "../../../../application/usecase/todo/todo-usecase";
-import { Todo } from "../../../../domain/todo/todo";
-import { TodoContext } from "../../../../infrastructure/di";
+import { todosReducer } from "../../../../../application/state/todo-state";
+import { TodoUsecase } from "../../../../../application/usecase/todo/todo-usecase";
+import { Todo } from "../../../../../domain/todo/todo";
+import { TodoContext } from "../../../../../infrastructure/di";
 import styles from "./todo-add-form.module.css";
 
 export const TodoAddForm = () => {
@@ -21,6 +21,7 @@ export const TodoAddForm = () => {
         setDescription("");
     };
 
+    // TODO: コンポーネント分離を検討
     return (
         <div className={styles.formArea}>
             <form onSubmit={addTodo} className={styles.form}>
