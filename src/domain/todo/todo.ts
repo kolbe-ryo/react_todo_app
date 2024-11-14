@@ -60,25 +60,6 @@ export class Todo {
         return this;
     }
 
-    public toJson(): string {
-        return JSON.stringify({
-            title: this.title,
-            description: this.description,
-        });
-    }
-
-    public static fromJson(json: string): Todo {
-        const todo = JSON.parse(json);
-        return new Todo(
-            todo.id,
-            todo.title,
-            todo.description,
-            todo.status,
-            new Date(todo.createdAt),
-            todo.userId
-        );
-    }
-
     public static titleValidationReg: string = '.*[^s]+.*';
 
 }
