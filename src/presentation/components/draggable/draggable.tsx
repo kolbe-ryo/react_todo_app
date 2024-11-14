@@ -13,9 +13,7 @@ export const Draggable: FC<DraggableProps> = ({ id, children }) => {
         listeners,
         attributes,
         transform,
-    } = useDraggable({
-        id
-    });
+    } = useDraggable({ id });
 
     const transformStyle = transform
         ? `translate(${transform.x}px, ${transform.y}px)`
@@ -26,10 +24,7 @@ export const Draggable: FC<DraggableProps> = ({ id, children }) => {
             ref={setNodeRef}
             {...attributes}
             {...listeners}
-            style={{
-                transform: transformStyle,
-                height: "fit-content"
-            }}
+            style={{ transform: transformStyle, height: "fit-content" }}
         >
             {children}
         </div>

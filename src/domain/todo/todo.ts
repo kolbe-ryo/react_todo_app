@@ -13,6 +13,7 @@ export class Todo {
             // TODO: エラー処理を追加する
             throw new Error("入力が不正です");
         }
+        console.log("CREATE TODO:", status);
         this.id = id;
         this.title = title;
         this.description = description ?? "";

@@ -26,12 +26,9 @@ const TodoCard: React.FC<TodoCardProps> = ({ todo, onTap }) => {
 
   const onDeleteTodoNoPropagation = async (event: React.MouseEvent<SVGElement>): Promise<void> => {
     event.stopPropagation();
-    console.log(todo.getId());
     const todos = await usecase.removeTodo(todo.getId());
     dispatch(todosReducer(todos));
   }
-
-  console.log('check status: ', todo.getStatus());
 
   return (
     <Draggable id={todo.getId()}>

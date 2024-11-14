@@ -9,7 +9,6 @@ import Status from '../../../../../domain/todo/value-object/status';
 import { TodoContext } from '../../../../../infrastructure/di';
 import { RootState } from '../../../../../redux/store';
 import Droppable from '../../../../components/droppable/droppable';
-import GridViewList from '../grid-view-list/grid-view-list';
 
 // TODO: コメント追加など行うこと
 export const StatusArea = () => {
@@ -32,6 +31,7 @@ export const StatusArea = () => {
         console.log('updateStatus: ', activeTodo);
 
         const updateTodos = await usecase.updateTodo(activeTodo);
+        console.log(updateTodos);
         dispatch(todosReducer(updateTodos));
     }
 
@@ -67,17 +67,11 @@ export const StatusArea = () => {
     return (
         <DndContext onDragEnd={onDragEnd} sensors={sensors}>
             <Stack direction="row" spacing={1} sx={{ justifyContent: "space-around" }}>
-                <Droppable id={Status.todo}>
-                    <GridViewList status={Status.todo} />
-                </Droppable>
+                <Droppable id={Status.todo} />
                 <Divider orientation="vertical" flexItem ></Divider>
-                <Droppable id={Status.progress}>
-                    <GridViewList status={Status.progress} />
-                </Droppable>
+                <Droppable id={Status.progress} />
                 <Divider orientation="vertical" flexItem />
-                <Droppable id={Status.done}>
-                    <GridViewList status={Status.done} />
-                </Droppable>
+                <Droppable id={Status.done} />
             </Stack>
         </DndContext>
     );

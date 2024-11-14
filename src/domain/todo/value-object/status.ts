@@ -16,4 +16,17 @@ export function getStatusColor(status: Status): string {
     }
 }
 
+export function statusValueOf(status: string): Status | undefined {
+    switch (status.toUpperCase()) {
+        case Status.todo:
+            return Status.todo;
+        case Status.progress:
+            return Status.progress;
+        case Status.done:
+            return Status.done;
+        default:
+            return undefined;
+    }
+}
+
 export default Status;

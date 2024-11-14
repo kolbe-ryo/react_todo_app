@@ -2,21 +2,22 @@
 // childrenを持つエリアのみのcomponent
 
 import { useDroppable } from "@dnd-kit/core";
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 import styled from "styled-components";
+import Status from "../../../domain/todo/value-object/status";
+import GridViewList from "../../pages/todo-list-page/body/grid-view-list/grid-view-list";
 
 type DroppableProps = {
-    id: string;
-    children: ReactNode;
+    id: Status;
 };
 
-export const Droppable: FC<DroppableProps> = ({ id, children }) => {
+export const Droppable: FC<DroppableProps> = ({ id }) => {
 
     const { setNodeRef, isOver } = useDroppable({ id });
 
     return (
         <Wrapper ref={setNodeRef} isOver={isOver}>
-            {children}
+            <GridViewList status={id} />
         </Wrapper>
     );
 };
