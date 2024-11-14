@@ -34,15 +34,15 @@ const TodoCard: React.FC<TodoCardProps> = ({ todo, onTap }) => {
   console.log('check status: ', todo.getStatus());
 
   return (
-    <div className={styles.card} onClick={() => onTap(todo)}>
-      <Draggable id={todo.getId()}>
+    <Draggable id={todo.getId()}>
+      <div className={styles.card} onClick={() => onTap(todo)}>
         <Title color={getStatusColor(todo.getStatus())}>{todo.getTitle()}</Title>
         <p className={styles.description}>{todo.getDescription()}</p>
         <p className={styles.createdAt}>{createdAt}</p>
         <StatusCard color={getStatusColor(todo.getStatus())}>{todo.getStatus()}</StatusCard>
         <RiDeleteBin6Line className={styles.deleteBin} onClick={onDeleteTodoNoPropagation} />
-      </Draggable>
-    </div>
+      </div>
+    </Draggable>
   );
 };
 

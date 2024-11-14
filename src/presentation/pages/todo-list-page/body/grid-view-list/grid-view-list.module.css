@@ -1,9 +1,3 @@
-.gridView {
-    display: grid;
-    gap: 16px;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-}
-
 .gridViewItem {
     background-color: #f2f2f2;
     border-radius: 8px;

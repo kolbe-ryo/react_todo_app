@@ -12,7 +12,6 @@ export const TodoListPage = () => {
       <div className={styles.space}>
         <TodoListPageHeader />
         <TodoAddForm />
-        {/* <GridViewList /> */}
         <StatusArea />
       </div>
     </TodoContext.Provider>

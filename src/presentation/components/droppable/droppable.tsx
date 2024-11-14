@@ -12,7 +12,7 @@ type DroppableProps = {
 
 export const Droppable: FC<DroppableProps> = ({ id, children }) => {
 
-    const { setNodeRef, isOver } = useDroppable({ id })
+    const { setNodeRef, isOver } = useDroppable({ id });
 
     return (
         <Wrapper ref={setNodeRef} isOver={isOver}>
@@ -24,6 +24,6 @@ export const Droppable: FC<DroppableProps> = ({ id, children }) => {
 export default Droppable;
 
 const Wrapper = styled.p<{ isOver: boolean }>`
-    max-width: 33%;
-    background-color: ${({ isOver }) => isOver ? 'rgb(234, 234, 234)' : 'white'};
+    max-width: 40%;
+    background-color: ${({ isOver }) => isOver ? 'rgb(240, 240, 240)' : 'white'};
 `;
