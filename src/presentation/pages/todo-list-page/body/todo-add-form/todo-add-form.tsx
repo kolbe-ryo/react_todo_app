@@ -21,7 +21,6 @@ export const TodoAddForm = () => {
         setDescription("");
     };
 
-    // TODO: コンポーネント分離を検討
     return (
         <div className={styles.formArea}>
             <form onSubmit={addTodo} className={styles.form}>
