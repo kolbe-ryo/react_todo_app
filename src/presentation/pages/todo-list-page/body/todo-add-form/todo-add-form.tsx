@@ -10,6 +10,7 @@ export const TodoAddForm = () => {
     const dispatch = useDispatch();
     const usecase = new TodoUsecase(useContext(TodoContext));
 
+    // フォーム内容を管理するstate
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 

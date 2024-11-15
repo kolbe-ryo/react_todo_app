@@ -20,9 +20,9 @@ import Droppable from '../../../../components/droppable/droppable';
  * 
  */
 export const StatusArea = () => {
-    // DI
     const dispatch = useDispatch();
     const usecase = new TodoUsecase(useContext(TodoContext));
+
     const todos = useSelector((state: RootState) => state.todos.value);
 
     const fetchTodos = async (): Promise<void> => {
@@ -39,25 +39,22 @@ export const StatusArea = () => {
         dispatch(todosReducer(updateTodos));
     }
 
+    // useSensorを用いて指定のpx以上動かないとドラッグと判定しないようにする
+    // この制約を加えないと、カード用をタップできない
     const mouseSensor = useSensor(MouseSensor, {
-        // 指定のpx以上動かないとドラッグと判定しない
-        // この制約を加えないと、カード用をタップできない
         activationConstraint: { distance: 15 },
     });
-
     const sensors = useSensors(mouseSensor);
 
-    // ドラッグアンドドロップイベント
+    // ドラッグアンドドロップしたら該当のTodoのステータスを更新する
     const onDragEnd = async (event: DragEndEvent): Promise<void> => {
+        // active: ドラッグしているTodo
+        // over  : ドロップ先エリア
         const { over, active } = event;
-        console.log('Drag End', over?.id, active.id);
+        console.log('onDragEnd', over?.id, active.id);
         if (over === null || active.data.current === null) {
             return;
         };
-        console.log('Drag End OK');
-
-        // active: ドラッグしているTodo
-        // over  : ドロップ先エリア
         await updateStatus(active.id.toString(), over.id as Status);
     };
 

@@ -17,7 +17,6 @@ type ListViewProps = {
 };
 
 export const ListView: FC<ListViewProps> = ({ status }) => {
-    // DI
     const dispatch = useDispatch();
     const usecase = new TodoUsecase(useContext(TodoContext));
 
@@ -29,6 +28,7 @@ export const ListView: FC<ListViewProps> = ({ status }) => {
     // todoが選択されたかどうかはnullか否かで判断する
     const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
 
+    // Todo内容の更新Modalに渡すupdate関数
     const updateTodo = async (updatedTodo: Todo): Promise<void> => {
         const todos = await usecase.updateTodo(updatedTodo);
         dispatch(todosReducer(todos));

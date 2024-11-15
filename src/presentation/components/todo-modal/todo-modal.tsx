@@ -21,12 +21,13 @@ type ModalProps = {
  * @returns {JSX.Element} モーダルコンポーネントのJSX要素
  */
 const Modal: React.FC<ModalProps> = ({ initialTodo, onClose, onUpdate }) => {
-
+  // モーダル内のフォームの状態を管理するState
   const [title, setTitle] = useState(initialTodo.getTitle());
   const [description, setDescription] = useState(initialTodo.getDescription());
 
   const color = getStatusColor(initialTodo.getStatus());
 
+  // 更新するtitleとdescriptionを元にTodoを更新する
   const onUpdateTodo = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
     const updatedTodos = initialTodo.updateTitle(title).updateDescription(description);

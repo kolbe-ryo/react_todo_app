@@ -18,7 +18,6 @@ type TodoCardProps = {
 };
 
 const TodoCard: React.FC<TodoCardProps> = ({ todo, onTap }) => {
-  // DI
   const dispatch = useDispatch();
   const usecase = new TodoUsecase(useContext(TodoContext));
 

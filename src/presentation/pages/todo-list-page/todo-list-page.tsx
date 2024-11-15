@@ -6,7 +6,6 @@ import { TodoListPageHeader } from "./header/todo-list-header";
 import styles from "./todo-list-page.module.css";
 
 export const TodoListPage = () => {
-
   return (
     <TodoContext.Provider value={useContext(TodoContext)}>
       <div className={styles.space}>
