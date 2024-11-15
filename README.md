@@ -10,16 +10,20 @@ URL：https://todo.kolbe-app.site/
 | Page | Authentiaction | TopPage |
 |--------|--------|--------|
 | View | <img width="300" alt="Auth" src="https://github.com/user-attachments/assets/2caf145b-e512-4bd0-9fd6-8e6c01bf8473"> | <img width="500" alt="TopPage" src="https://github.com/user-attachments/assets/8f8b4a81-f606-47bd-8f41-83230bb861c9"> |
-| Description | ログイン・サインアップを行う画面：メール認証によりユーザー登録・認証が可能です | TODOアプリを提供する画面：Todoカードはステータス別に管理され、ドラッグ&ドロップでステータスを自由に変更することが可能です |
+| Description | ログイン・サインアップを行う画面 | TODOアプリを提供する画面 |
 
 #### Authentication
 - Email認証
+
+メール認証によりユーザー登録・認証が可能です
 
 #### TopPage
 - 取得：TODO一覧を取得・表示できます
 - 追加：タイトルと説明を入力し、TODOタスクを追加できます
 - 削除：不要になったTODOタスクを削除できます
 - 更新：TODOタスクの内容を変更できます
+
+Todoカードはステータス別に管理され、ドラッグ&ドロップでステータスを自由に変更することが可能です
 
 ## 使用技術
 ### フロントエンド
