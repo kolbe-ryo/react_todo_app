@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
+import styled from "styled-components";
 import { Todo } from "../../../domain/todo/todo";
+import { getStatusColor } from "../../../domain/todo/value-object/status";
 import styles from "./todo-modal.module.css";
 
 type ModalProps = {
@@ -14,17 +16,18 @@ const Modal: React.FC<ModalProps> = ({ initialTodo, onClose, onUpdate }) => {
   const [title, setTitle] = useState(initialTodo.getTitle());
   const [description, setDescription] = useState(initialTodo.getDescription());
 
+  const color = getStatusColor(initialTodo.getStatus());
+
   const onUpdateTodo = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
     const updatedTodos = initialTodo.updateTitle(title).updateDescription(description);
     onUpdate(updatedTodos);
   }
 
-  // TODO: コンポーネント分離を検討
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <h3>{initialTodo.getTitle()}</h3>
+        <Title color={color}>{initialTodo.getTitle()}</Title>
         <form onSubmit={onUpdateTodo} className={styles.form}>
           <input
             type="text"
@@ -33,8 +36,7 @@ const Modal: React.FC<ModalProps> = ({ initialTodo, onClose, onUpdate }) => {
             onChange={(e) => setTitle(e.target.value)}
             className={styles.inputTitle}
             required
-            pattern=".*[^\s]+.*"
-            title="タイトルは空白は禁止されています"
+            pattern={Todo.titleValidationReg}
           />
           <input
             type="text"
@@ -43,12 +45,30 @@ const Modal: React.FC<ModalProps> = ({ initialTodo, onClose, onUpdate }) => {
             onChange={(e) => setDescription(e.target.value)}
             className={styles.inputDescription}
           />
-          <button type="submit" className={styles.button}>更新</button>
+          <Button type="submit" color={color} className={styles.button}>更新</Button>
         </form>
         <IoCloseSharp className={styles.close} onClick={onClose} />
       </div>
     </div>
   );
 };
+
+const Title = styled.h3<{ color: string }>`
+  margin: 0;
+  font-size: 1.2em;
+  color: ${({ color }) => color};
+`;
+
+const Button = styled.button<{ color: string }>`
+  width: 20%;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background-color: ${({ color }) => color};
+`;
 
 export default Modal;
