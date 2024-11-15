@@ -9,7 +9,7 @@ export const todosSlice = createSlice({
   },
   reducers: {
     todosReducer: (state, action: PayloadAction<Todo[]>) => {
-        state.value = [...action.payload];
+      state.value = [...action.payload];
     },
   },
 })
