@@ -14,7 +14,6 @@ URL：https://todo.kolbe-app.site/
 
 #### Authentication
 - Email認証
-
 メール認証によりユーザー登録・認証が可能です
 
 #### TopPage
@@ -22,7 +21,6 @@ URL：https://todo.kolbe-app.site/
 - 追加：タイトルと説明を入力し、TODOタスクを追加できます
 - 削除：不要になったTODOタスクを削除できます
 - 更新：TODOタスクの内容を変更できます
-
 Todoカードはステータス別に管理され、ドラッグ&ドロップでステータスを自由に変更することが可能です
 
 ## 使用技術
