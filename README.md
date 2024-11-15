@@ -10,7 +10,7 @@ URL：https://todo.kolbe-app.site/
 // TODO: スクショ
 | Page | Authentiaction | TopPage |
 |--------|--------|--------|
-| View | <img width="300" alt="Auth" src="https://github.com/user-attachments/assets/2caf145b-e512-4bd0-9fd6-8e6c01bf8473"> | <img width="300" alt="TopPage" src="https://github.com/user-attachments/assets/8f8b4a81-f606-47bd-8f41-83230bb861c9"> |
+| View | <img width="300" alt="Auth" src="https://github.com/user-attachments/assets/2caf145b-e512-4bd0-9fd6-8e6c01bf8473"> | <img width="500" alt="TopPage" src="https://github.com/user-attachments/assets/8f8b4a81-f606-47bd-8f41-83230bb861c9"> |
 | Description | ログイン・サインアップを行う画面 | TODOアプリを提供する画面 |
 
 #### Authentication
