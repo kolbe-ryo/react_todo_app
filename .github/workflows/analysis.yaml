@@ -13,10 +13,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
-          cache: 'npm'
+          node-version: "lts/*"
+          cache: "npm"
       - run: npm install
       - run: npm run lint
       # TODO: CICDを使用する場合は、CI=falseを外す
       - run: CI=false npm run build
       - run: npm run type-check
+      - run: npm test
