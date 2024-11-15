@@ -10,6 +10,7 @@ export const TodoAddForm = () => {
     const dispatch = useDispatch();
     const usecase = new TodoUsecase(useContext(TodoContext));
 
+    // フォーム内容を管理するstate
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
@@ -21,7 +22,6 @@ export const TodoAddForm = () => {
         setDescription("");
     };
 
-    // TODO: コンポーネント分離を検討
     return (
         <div className={styles.formArea}>
             <form onSubmit={addTodo} className={styles.form}>

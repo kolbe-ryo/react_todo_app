@@ -1,5 +1,6 @@
 import { Todo } from "../../domain/todo/todo";
 import { ITodoRepository } from "../../domain/todo/todo-repository";
+import Status from "../../domain/todo/value-object/status";
 
 export class MockTodoRepository implements ITodoRepository {
     private todos: Todo[] = [
@@ -12,10 +13,10 @@ export class MockTodoRepository implements ITodoRepository {
         new Todo("7", "Todo 7", "Description 7", null, new Date(), "user7"),
         new Todo("8", "Todo 8", "Description 8", null, new Date(), "user8"),
         new Todo("9", "Todo 9", "Description 9", null, new Date(), "user9"),
-        new Todo("10", "Todo 10", "Description 10", null, new Date(), "user10"),
-        new Todo("11", "Todo 11", "Description 11", null, new Date(), "user11"),
-        new Todo("12", "Todo 12", "Description 12", null, new Date(), "user12"),
-        new Todo("13", "Todo 13", "Description 13", null, new Date(), "user13"),
+        new Todo("10", "Todo 10", "Description 10", Status.progress, new Date(), "user10"),
+        new Todo("11", "Todo 11", "Description 11", Status.progress, new Date(), "user11"),
+        new Todo("12", "Todo 12", "Description 12", Status.progress, new Date(), "user12"),
+        new Todo("13", "Todo 13", "Description 13", Status.done, new Date(), "user13"),
     ];
 
     public async fetchAll(): Promise<Todo[]> {

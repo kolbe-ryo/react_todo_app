@@ -8,6 +8,7 @@
   cursor: pointer;
   position: relative;
   background-color: white;
+  width: 220px;
 }
 
 .card:hover {

@@ -8,6 +8,7 @@ import { Todo } from "../../../domain/todo/todo";
 import { getStatusColor } from "../../../domain/todo/value-object/status";
 import { TodoContext } from "../../../infrastructure/di";
 import { formatDateToYYYYMMDDHHMM } from "../../../utils/time-format";
+import { Draggable } from "../draggable/draggable";
 import { StatusCard } from "./status-card/status-card";
 import styles from "./todo-card.module.css";
 
@@ -17,7 +18,6 @@ type TodoCardProps = {
 };
 
 const TodoCard: React.FC<TodoCardProps> = ({ todo, onTap }) => {
-  // DI
   const dispatch = useDispatch();
   const usecase = new TodoUsecase(useContext(TodoContext));
 
@@ -25,19 +25,20 @@ const TodoCard: React.FC<TodoCardProps> = ({ todo, onTap }) => {
 
   const onDeleteTodoNoPropagation = async (event: React.MouseEvent<SVGElement>): Promise<void> => {
     event.stopPropagation();
-    console.log(todo.getId());
     const todos = await usecase.removeTodo(todo.getId());
     dispatch(todosReducer(todos));
   }
 
   return (
-    <div className={styles.card} onClick={() => onTap(todo)}>
-      <Title color={getStatusColor(todo.getStatus())}>{todo.getTitle()}</Title>
-      <p className={styles.description}>{todo.getDescription()}</p>
-      <p className={styles.createdAt}>{createdAt}</p>
-      <StatusCard color={getStatusColor(todo.getStatus())}>{todo.getStatus()}</StatusCard>
-      <RiDeleteBin6Line className={styles.deleteBin} onClick={onDeleteTodoNoPropagation} />
-    </div>
+    <Draggable id={todo.getId()}>
+      <div className={styles.card} onClick={() => onTap(todo)}>
+        <Title color={getStatusColor(todo.getStatus())}>{todo.getTitle()}</Title>
+        <p className={styles.description}>{todo.getDescription()}</p>
+        <p className={styles.createdAt}>{createdAt}</p>
+        <StatusCard color={getStatusColor(todo.getStatus())}>{todo.getStatus()}</StatusCard>
+        <RiDeleteBin6Line className={styles.deleteBin} onClick={onDeleteTodoNoPropagation} />
+      </div>
+    </Draggable>
   );
 };
 

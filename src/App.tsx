@@ -15,13 +15,16 @@ function App() {
   const authState = AuthState.getInstance();
   const navigate = useNavigate();
 
+  // ログイン状態を取得または監視し、変更があればセッションを更新する
   useEffect(() => {
+    // 取得
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
       authState.setUserId(data?.session?.user.id);
       setLoading(false);
     });
 
+    // 監視
     supabase.auth.onAuthStateChange((_, session) => {
       setSession(session);
       authState.setUserId(session?.user?.id);
