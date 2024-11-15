@@ -10,7 +10,7 @@ describe("Todoオブジェクトのテスト", () => {
     const createdAt = new Date();
     const userId = "userId";
 
-    it("Todoプロパティが正しく設定されていること", () => {
+    test("Todoプロパティが正しく設定されていること", () => {
         const todo = new Todo(id, title, description, status, createdAt, userId);
         expect(todo.getId()).toBe(id);
         expect(todo.getTitle()).toBe(title);
@@ -19,7 +19,7 @@ describe("Todoオブジェクトのテスト", () => {
         expect(todo.getCreatedAt()).toBe(createdAt);
     });
 
-    it("nullableなプロパティがデフォルト値で設定されること", () => {
+    test("nullableなプロパティがデフォルト値で設定されること", () => {
         const todo = new Todo(id, title, null, null, createdAt, userId);
         expect(todo.getId()).toBe(id);
         expect(todo.getTitle()).toBe(title);
@@ -29,7 +29,7 @@ describe("Todoオブジェクトのテスト", () => {
     });
 
     // updateのテスト
-    it("特定のプロパティのみTodoが更新可能なこと", () => {
+    test("特定のプロパティのみTodoが更新可能なこと", () => {
         const todo = new Todo(id, title, description, status, createdAt, userId);
         const newTitle = "newTitle";
         const newDescription = "newDescription";
@@ -43,7 +43,7 @@ describe("Todoオブジェクトのテスト", () => {
     });
 
     // Todo.titleValidationRegを用いた正規表現のテスト
-    it("title設定用のバリデーションによって空文字が検出されること", () => {
+    test("title設定用のバリデーションによって空文字が検出されること", () => {
         const titleValidationReg = Todo.titleValidationReg;
         const title = "title";
         const invalidTitle = "";
