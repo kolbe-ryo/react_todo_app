@@ -7,11 +7,10 @@
 URL：https://todo.kolbe-app.site/
 
 ### 機能
-// TODO: スクショ
 | Page | Authentiaction | TopPage |
 |--------|--------|--------|
 | View | <img width="300" alt="Auth" src="https://github.com/user-attachments/assets/2caf145b-e512-4bd0-9fd6-8e6c01bf8473"> | <img width="500" alt="TopPage" src="https://github.com/user-attachments/assets/8f8b4a81-f606-47bd-8f41-83230bb861c9"> |
-| Description | ログイン・サインアップを行う画面 | TODOアプリを提供する画面 |
+| Description | ログイン・サインアップを行う画面：メール認証によりユーザー登録・認証が可能です | TODOアプリを提供する画面：Todoカードはステータス別に管理され、ドラッグ&ドロップでステータスを自由に変更することが可能です |
 
 #### Authentication
 - Email認証
