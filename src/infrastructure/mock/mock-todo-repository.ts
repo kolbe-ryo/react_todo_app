@@ -23,13 +23,12 @@ export class MockTodoRepository implements ITodoRepository {
         return this.todos;
     }
 
-    public async update(todo: Todo): Promise<Todo[]> {
+    public async update(todo: Todo): Promise<void> {
         // todosの中からidが一致するものを探し、更新する
         this.todos = this.todos.map(oldTodo => oldTodo.getId() === todo.getId() ? todo : oldTodo);
-        return this.todos;
     }
 
-    public async save(title: string, description: string): Promise<Todo[]> {
+    public async save(title: string, description: string): Promise<void> {
         const todo = new Todo(
             (this.todos.length + 1).toString(),
             title,
@@ -39,11 +38,9 @@ export class MockTodoRepository implements ITodoRepository {
             "user1"
         );
         this.todos.push(todo);
-        return this.todos;
     }
 
-    public async delete(id: string): Promise<Todo[]> {
+    public async delete(id: string): Promise<void> {
         this.todos = this.todos.filter(todo => todo.getId() !== id);
-        return this.todos;
     }
 }
