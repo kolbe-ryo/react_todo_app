@@ -1,21 +1,22 @@
 import { FC, useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
 import { todosReducer } from "../../../../../application/state/todo-state";
 import { TodoUsecase } from "../../../../../application/usecase/todo/todo-usecase";
 import { Todo } from "../../../../../domain/todo/todo";
-import Status from "../../../../../domain/todo/value-object/status";
+import Status, { getStatusColor } from "../../../../../domain/todo/value-object/status";
 import { TodoContext } from "../../../../../infrastructure/di";
 import { RootState } from "../../../../../redux/store";
+import { StatusIcon } from "../../../../components/status-icon/status-icon";
 import TodoCard from '../../../../components/todo-card/todo-card';
 import Modal from "../../../../components/todo-modal/todo-modal";
 
 
-type GridViewListProps = {
+type ListViewProps = {
     status: Status;
 };
 
-// TODO: GridViewである必要なし。cssと命名の再検討
-export const GridViewList: FC<GridViewListProps> = ({ status }) => {
+export const ListView: FC<ListViewProps> = ({ status }) => {
     // DI
     const dispatch = useDispatch();
     const usecase = new TodoUsecase(useContext(TodoContext));
@@ -36,6 +37,10 @@ export const GridViewList: FC<GridViewListProps> = ({ status }) => {
 
     return (
         <div>
+            <Wrapper>
+                <StatusIcon status={status} color={getStatusColor(status)} />
+                {filteredTodos.length}
+            </Wrapper>
             {filteredTodos.map(todo => (
                 <TodoCard
                     key={todo.getId()}
@@ -54,4 +59,9 @@ export const GridViewList: FC<GridViewListProps> = ({ status }) => {
     );
 };
 
-export default GridViewList;
+const Wrapper = styled.div`
+    text-align: center;
+    padding-bottom: 20px;
+`;
+
+export default ListView;
