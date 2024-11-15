@@ -10,7 +10,7 @@ URL：https://todo.kolbe-app.site/
 // TODO: スクショ
 | Page | Authentiaction | TopPage |
 |--------|--------|--------|
-| View | Cell | Cell |
+| View | <img width="300" alt="Auth" src="https://github.com/user-attachments/assets/2caf145b-e512-4bd0-9fd6-8e6c01bf8473"> | <img width="300" alt="TopPage" src="https://github.com/user-attachments/assets/8f8b4a81-f606-47bd-8f41-83230bb861c9"> |
 | Description | ログイン・サインアップを行う画面 | TODOアプリを提供する画面 |
 
 #### Authentication
@@ -52,6 +52,8 @@ API仕様は以下のディレクトリ内にjson形式で保存されていま�
 [supabase/api-spec.json](supabase/api-spec.json)
 
 ## アーキテクチャ
+Domain層は独立しどの層にも依存しないよう構成。
+また、Inflastructure層の実装はContextによるDIで切り替え可能にしています。
 ![archtecture drawio](https://github.com/user-attachments/assets/c1acef8e-3d19-42d2-883f-5552fe515b1f)
 
 ## ディレクトリ構成
