@@ -17,7 +17,6 @@ jobs:
           cache: "npm"
       - run: npm install
       - run: npm run lint
-      # TODO: CICDを使用する場合は、CI=falseを外す
-      - run: CI=false npm run build
+      - run: npm run build
       - run: npm run type-check
       - run: npm test
