@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { todosReducer } from '../../../../../application/state/todo-state';
-import { TodoUsecase } from '../../../../../application/usecase/todo/todo-usecase';
+import { TodoUsecase } from '../../../../../application/usecase/todo-usecase';
 import Status from '../../../../../domain/todo/value-object/status';
 import { TodoContext } from '../../../../../infrastructure/di';
 import { RootState } from '../../../../../redux/store';

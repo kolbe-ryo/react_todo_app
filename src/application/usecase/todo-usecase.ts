@@ -1,5 +1,5 @@
-import { Todo } from "../../../domain/todo/todo";
-import { ITodoRepository } from "../../../domain/todo/todo-repository";
+import { Todo } from "../../domain/todo/todo";
+import { ITodoRepository } from "../../domain/todo/todo-repository";
 
 export class TodoUsecase {
 

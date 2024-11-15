@@ -3,7 +3,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { todosReducer } from "../../../application/state/todo-state";
-import { TodoUsecase } from "../../../application/usecase/todo/todo-usecase";
+import { TodoUsecase } from "../../../application/usecase/todo-usecase";
 import { Todo } from "../../../domain/todo/todo";
 import { getStatusColor } from "../../../domain/todo/value-object/status";
 import { TodoContext } from "../../../infrastructure/di";
