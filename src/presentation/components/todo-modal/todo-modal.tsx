@@ -11,6 +11,15 @@ type ModalProps = {
   onUpdate: (updatedTodo: Todo) => Promise<void>;
 };
 
+/**
+ * Modalコンポーネントは、ToDoアイテムの詳細を編集するためのモーダルコンポーネントです。
+ * 
+ * @param {ModalProps} props - モーダルコンポーネントのプロパティ
+ * @param {Todo} props.initialTodo - 初期のTodoオブジェクト
+ * @param {() => void} props.onClose - モーダルを閉じるためのコールバック関数
+ * @param {(updatedTodo: Todo) => void} props.onUpdate - Todoを更新するためのコールバック関数
+ * @returns {JSX.Element} モーダルコンポーネントのJSX要素
+ */
 const Modal: React.FC<ModalProps> = ({ initialTodo, onClose, onUpdate }) => {
 
   const [title, setTitle] = useState(initialTodo.getTitle());

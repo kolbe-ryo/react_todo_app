@@ -10,7 +10,15 @@ import { TodoContext } from '../../../../../infrastructure/di';
 import { RootState } from '../../../../../redux/store';
 import Droppable from '../../../../components/droppable/droppable';
 
-// TODO: コメント追加など行うこと
+/**
+ * ステータスエリアコンポーネント
+ * 
+ * @description
+ * このコンポーネントは、Todoリストのステータスエリアを表示し、ドラッグアンドドロップによるステータスの更新を行います。
+ * 
+ * @returns {JSX.Element} ステータスエリアのJSX要素
+ * 
+ */
 export const StatusArea = () => {
     // DI
     const dispatch = useDispatch();
@@ -27,11 +35,7 @@ export const StatusArea = () => {
         if (!activeTodo) {
             return;
         };
-
-        console.log('updateStatus: ', activeTodo);
-
         const updateTodos = await usecase.updateTodo(activeTodo);
-        console.log(updateTodos);
         dispatch(todosReducer(updateTodos));
     }
 

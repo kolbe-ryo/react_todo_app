@@ -1,4 +1,11 @@
 
+/**
+ * タスクのステータスを表す列挙型。
+ * 
+ * - `todo`: タスクが未着手の状態。
+ * - `progress`: タスクが進行中の状態。
+ * - `done`: タスクが完了した状態。
+ */
 export enum Status {
     todo = "TODO",
     progress = "PROGRESS",

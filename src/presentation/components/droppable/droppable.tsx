@@ -8,6 +8,13 @@ type DroppableProps = {
     id: Status;
 };
 
+/**
+ * Droppableはドロップ可能なコンポーネントを表します。
+ * 
+ * @param {DroppableProps} props - コンポーネントのプロパティ。
+ * @param {string} props.id - ドロップ可能エリアの識別子。
+ * @returns {JSX.Element} ドロップ可能なエリアを表すJSX要素。
+ */
 export const Droppable: FC<DroppableProps> = ({ id }) => {
 
     const { setNodeRef, isOver } = useDroppable({ id });
