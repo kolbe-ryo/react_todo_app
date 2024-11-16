@@ -2,7 +2,7 @@ import { useDroppable } from "@dnd-kit/core";
 import { FC } from "react";
 import styled from "styled-components";
 import Status from "../../../domain/todo/value-object/status";
-import GridViewList from "../../pages/todo-list-page/body/list-view/list-view";
+import ListView from "../../pages/todo-list-page/body/list-view/list-view";
 
 type DroppableProps = {
     id: Status;
@@ -21,7 +21,7 @@ export const Droppable: FC<DroppableProps> = ({ id }) => {
 
     return (
         <Wrapper ref={setNodeRef} isOver={isOver}>
-            <GridViewList status={id} />
+            <ListView status={id} />
         </Wrapper>
     );
 };
