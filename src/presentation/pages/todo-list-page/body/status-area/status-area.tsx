@@ -9,6 +9,7 @@ import Status from '../../../../../domain/todo/value-object/status';
 import { TodoContext } from '../../../../../infrastructure/di';
 import { RootState } from '../../../../../redux/store';
 import Droppable from '../../../../components/droppable/droppable';
+import ListView from '../list-view/list-view';
 
 /**
  * ステータスエリアコンポーネント
@@ -67,11 +68,17 @@ export const StatusArea = () => {
     return (
         <DndContext onDragEnd={onDragEnd} sensors={sensors}>
             <Stack direction="row" spacing={1} sx={{ justifyContent: "space-around" }}>
-                <Droppable id={Status.todo} />
+                <Droppable id={Status.todo}>
+                    <ListView status={Status.todo} />
+                </Droppable>
                 <Divider orientation="vertical" flexItem ></Divider>
-                <Droppable id={Status.progress} />
+                <Droppable id={Status.progress}>
+                    <ListView status={Status.progress} />
+                </Droppable>
                 <Divider orientation="vertical" flexItem />
-                <Droppable id={Status.done} />
+                <Droppable id={Status.done}>
+                    <ListView status={Status.done} />
+                </Droppable>
             </Stack>
         </DndContext>
     );
