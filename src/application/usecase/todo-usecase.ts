@@ -14,17 +14,17 @@ export class TodoUsecase {
     }
 
     async updateTodo(todo: Todo): Promise<Todo[]> {
-        this.todoRepository.update(todo);
+        await this.todoRepository.update(todo);
         return await this.fetchTodos();
     }
 
     async addTodo(title: string, description: string): Promise<Todo[]> {
-        this.todoRepository.save(title, description);
+        await this.todoRepository.save(title, description);
         return await this.fetchTodos();
     }
 
     async removeTodo(id: string): Promise<Todo[]> {
-        this.todoRepository.delete(id);
+        await this.todoRepository.delete(id);
         return await this.fetchTodos();
     }
 }
