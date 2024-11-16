@@ -29,8 +29,15 @@ export const StatusArea = () => {
     const todos = useSelector((state: RootState) => state.todos.value);
 
     const fetchTodos = async (): Promise<void> => {
-        const fetchTodos = await usecase.fetchTodos();
-        dispatch(todosReducer(fetchTodos));
+        try {
+            const fetchTodos = await usecase.fetchTodos();
+            dispatch(todosReducer(fetchTodos));
+        } catch (e) {
+            console.error(e);
+            // TODO: 特定のエラークラスを作成して、それだった場合とそれ以外で、処理を変更する。UpdateErrorなど
+            navigate('/error', { state: { message: 'データ取得に失敗しました' } });
+        }
+
     }
 
     const updateStatus = async (id: string, status: Status): Promise<void> => {
@@ -51,6 +58,7 @@ export const StatusArea = () => {
             dispatch(todosReducer(updateTodos));
         } catch (e) {
             console.error(e);
+            // TODO: 特定のエラークラスを作成して、それだった場合とそれ以外で、処理を変更する。UpdateErrorなど
             navigate('/error', { state: { message: 'ステータス更新に失敗しました' } });
         }
     }
