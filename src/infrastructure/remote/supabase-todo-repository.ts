@@ -26,7 +26,6 @@ export class SupabaseTodoRepository implements ITodoRepository {
             .eq('userId', this.authState.getUserId())
             .order('createdAt', { ascending: false });
 
-        // TODO: エラーハンドリング
         if (error) {
             throw error;
         }
@@ -61,7 +60,6 @@ export class SupabaseTodoRepository implements ITodoRepository {
             })
             .eq('id', todo.getId());
 
-        // TODO: エラーハンドリング
         if (error) {
             throw error;
         }
@@ -86,9 +84,7 @@ export class SupabaseTodoRepository implements ITodoRepository {
                 userId: this.authState.getUserId(),
             });
 
-        // TODO: エラーハンドリング
         if (error) {
-            console.log(error);
             throw error;
         }
     }
@@ -106,7 +102,6 @@ export class SupabaseTodoRepository implements ITodoRepository {
             .delete()
             .eq('id', id);
 
-        // TODO: エラーハンドリング
         if (error) {
             throw error;
         }

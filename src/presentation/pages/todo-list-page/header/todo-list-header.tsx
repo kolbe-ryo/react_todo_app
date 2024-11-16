@@ -10,12 +10,12 @@ export const TodoListPageHeader = () => {
         try {
             const { error } = await supabase.auth.signOut()
             if (error) {
-                // TODO: エラー内容によって処理するか決める
                 throw error;
             }
             navigate('/login');
         } catch {
             alert('エラーが発生しました。');
+            navigate('/');
         }
     };
 
