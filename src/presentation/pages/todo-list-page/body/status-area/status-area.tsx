@@ -3,6 +3,7 @@ import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { todosReducer } from '../../../../../application/state/todo-state';
 import { TodoUsecase } from '../../../../../application/usecase/todo-usecase';
 import Status from '../../../../../domain/todo/value-object/status';
@@ -23,6 +24,7 @@ import ListView from '../list-view/list-view';
 export const StatusArea = () => {
     const dispatch = useDispatch();
     const usecase = new TodoUsecase(useContext(TodoContext));
+    const navigate = useNavigate();
 
     const todos = useSelector((state: RootState) => state.todos.value);
 
@@ -36,8 +38,21 @@ export const StatusArea = () => {
         if (!activeTodo) {
             return;
         };
-        const updateTodos = await usecase.updateTodo(activeTodo);
-        dispatch(todosReducer(updateTodos));
+
+        // ローカル上は更新しておくことでUI上では即時反映される
+        const updatedTodos = todos.map(todo => {
+            return todo.getId() === activeTodo.getId() ? activeTodo : todo;
+        });
+        dispatch(todosReducer(updatedTodos));
+
+        // サーバー上のデータを更新し、失敗していた場合は元に戻る
+        try {
+            const updateTodos = await usecase.updateTodo(activeTodo);
+            dispatch(todosReducer(updateTodos));
+        } catch (e) {
+            console.error(e);
+            navigate('/error', { state: { message: 'ステータス更新に失敗しました' } });
+        }
     }
 
     // useSensorを用いて指定のpx以上動かないとドラッグと判定しないようにする
