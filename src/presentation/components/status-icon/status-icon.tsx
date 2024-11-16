@@ -14,11 +14,11 @@ export const StatusIcon: React.FC<StatusIconProps> = ({ status, color }) => {
     const size = '40px';
     switch (status) {
         case Status.todo:
-            return <BsPersonStanding color={color} size={size} />;
+            return <BsPersonStanding color={color} size={size} data-testid="BsPersonStanding" />;
         case Status.progress:
-            return <FaRunning color={color} size={size} />;
+            return <FaRunning color={color} size={size} data-testid="FaRunning" />;
         case Status.done:
-            return <MdEmojiPeople color={color} size={size} />;
+            return <MdEmojiPeople color={color} size={size} data-testid="MdEmojiPeople" />;
         default:
             return null;
     }
