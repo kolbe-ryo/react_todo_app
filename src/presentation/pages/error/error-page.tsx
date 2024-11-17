@@ -1,4 +1,5 @@
 import { Player } from "@lottiefiles/react-lottie-player";
+import { Button } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import pageNotFoundAnimation from '../../../asset/animations/404.json';
 import styles from './error-page.module.css';
@@ -10,8 +11,6 @@ const ErrorPage = () => {
   const location = useLocation();
   const messagestate = location.state as MessageState;
 
-  // TODO: 戻るを設置する
-
   return (
     <div className={styles.container}>
       <Player
@@ -22,6 +21,9 @@ const ErrorPage = () => {
       />
       <p className={styles.message}>Error Occured</p>
       <p className={styles.subMessage}>{messagestate.message}</p>
+      <Button variant="contained" onClick={() => window.history.back()}>
+        戻る
+      </Button>
     </div>
   );
 };
