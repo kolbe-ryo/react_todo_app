@@ -23,7 +23,7 @@ export const TodoListPageHeader = () => {
         <div className={styles.header}>
             <h1 className={styles.title}>TODO</h1>
             <h3 className={styles.subtitle}>タスクを管理するアプリ</h3>
-            <TbLogout className={styles.logout} onClick={logout} />
+            <TbLogout className={styles.logout} onClick={logout} data-testid="logout" />
         </div>
     );
 }
