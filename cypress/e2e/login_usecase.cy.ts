@@ -1,10 +1,10 @@
 
 /// <reference types="cypress" />
 
-import { before } from "mocha";
-
 describe('認証関連のユースケース', () => {
 
+    // ログイン情報は、cypress/fixtures/user.jsonに記載してください
+    // ただし、emailとpasswordは認証済みのものを使用してください
     let email: string;
     let password: string;
 
