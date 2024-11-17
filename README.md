@@ -60,38 +60,76 @@ Domain層は独立しどの層にも依存しないよう構成。
 ![archtecture drawio](https://github.com/user-attachments/assets/c1acef8e-3d19-42d2-883f-5552fe515b1f)
 
 ## ディレクトリ構成
+ tree -I 'node_modules'コマンドで出力
+ 
 ```
 .
 ├── README.md
-├── build
 ├── node_modules
+├── build
+│   ├── asset-manifest.json
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   ├── robots.txt
+│   └── static
+│       ├── css
+│       │   ├── main.ef0b231d.css
+│       │   └── main.ef0b231d.css.map
+│       └── js
+│           ├── 952.ddfa7b2a.chunk.js
+│           ├── 952.ddfa7b2a.chunk.js.map
+│           ├── main.146a72b0.js
+│           ├── main.146a72b0.js.LICENSE.txt
+│           └── main.146a72b0.js.map
 ├── buildspec.yml
+├── cypress
+│   ├── downloads
+│   ├── e2e
+│   │   └── home_page.cy.ts
+│   ├── fixtures
+│   │   └── example.json
+│   └── support
+│       ├── commands.ts
+│       └── e2e.ts
+├── cypress.config.ts
 ├── eslint.config.mjs
 ├── package-lock.json
 ├── package.json
 ├── project-tree.txt
 ├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
 ├── src
-│   ├── App.module.css
-│   ├── App.test.tsx
 │   ├── App.tsx
 │   ├── application
 │   │   ├── state
+│   │   │   ├── auth-state.test.ts
 │   │   │   ├── auth-state.ts
+│   │   │   ├── todo-state.test.ts
 │   │   │   └── todo-state.ts
 │   │   └── usecase
-│   │       └── todo
-│   │           └── todo-usecase.ts
+│   │       ├── todo-usecase.test.ts
+│   │       └── todo-usecase.ts
 │   ├── asset
 │   │   └── animations
-│   │       └── 404.json
+│   │       ├── 404.json
+│   │       └── loading.json
 │   ├── domain
-│   │   ├── authentication
-│   │   │   └── user-auth.ts
-│   │   ├── exception
 │   │   └── todo
+│   │       ├── error
 │   │       ├── todo-repository.ts
-│   │       └── todo.ts
+│   │       ├── todo.test.ts
+│   │       ├── todo.ts
+│   │       └── value-object
+│   │           ├── status.test.ts
+│   │           └── status.ts
 │   ├── index.tsx
 │   ├── infrastructure
 │   │   ├── di.ts
@@ -103,7 +141,22 @@ Domain層は独立しどの層にも依存しないよう構成。
 │   │       └── supabase-todo-repository.ts
 │   ├── presentation
 │   │   ├── components
+│   │   │   ├── draggable
+│   │   │   │   ├── draggable.test.tsx
+│   │   │   │   └── draggable.tsx
+│   │   │   ├── droppable
+│   │   │   │   ├── droppable.test.tsx
+│   │   │   │   └── droppable.tsx
+│   │   │   ├── loading
+│   │   │   │   ├── loading.module.css
+│   │   │   │   ├── loading.test.tsx
+│   │   │   │   └── loading.tsx
+│   │   │   ├── status-icon
+│   │   │   │   ├── status-icon.test.tsx
+│   │   │   │   └── status-icon.tsx
 │   │   │   ├── todo-card
+│   │   │   │   ├── status-card
+│   │   │   │   │   └── status-card.tsx
 │   │   │   │   ├── todo-card.module.css
 │   │   │   │   └── todo-card.tsx
 │   │   │   └── todo-modal
@@ -111,25 +164,34 @@ Domain層は独立しどの層にも依存しないよう構成。
 │   │   │       └── todo-modal.tsx
 │   │   └── pages
 │   │       ├── authentication
+│   │       │   ├── auth.module.css
+│   │       │   ├── auth.tsx
 │   │       │   ├── login
 │   │       │   │   ├── login.module.css
 │   │       │   │   └── login.tsx
 │   │       │   └── signup
 │   │       │       ├── signup.module.css
 │   │       │       └── signup.tsx
+│   │       ├── error
+│   │       │   ├── error-page.module.css
+│   │       │   └── error-page.tsx
 │   │       ├── not-found
 │   │       │   ├── not-found-page.module.css
+│   │       │   ├── not-found-page.test.tsx
 │   │       │   └── not-found-page.tsx
 │   │       └── todo-list-page
 │   │           ├── body
-│   │           │   ├── grid-view-list.module.css
-│   │           │   ├── grid-view-list.tsx
-│   │           │   ├── todo-add-form.module.css
-│   │           │   └── todo-add-form.tsx
+│   │           │   ├── list-view
+│   │           │   │   └── list-view.tsx
+│   │           │   ├── status-area
+│   │           │   │   ├── status-area.module.css
+│   │           │   │   └── status-area.tsx
+│   │           │   └── todo-add-form
+│   │           │       ├── todo-add-form.module.css
+│   │           │       └── todo-add-form.tsx
 │   │           ├── header
 │   │           │   ├── todo-list-header.module.css
 │   │           │   └── todo-list-header.tsx
-│   │           ├── todo-list-page.module.css
 │   │           └── todo-list-page.tsx
 │   ├── react-app-env.d.ts
 │   ├── redux
@@ -137,7 +199,8 @@ Domain層は独立しどの層にも依存しないよう構成。
 │   ├── reportWebVitals.ts
 │   ├── setupTests.ts
 │   └── utils
-│       └── time-format.tsx
+│       ├── time-format.test.ts
+│       └── time-format.ts
 ├── supabase
 │   ├── api-spec.json
 │   └── config.toml
