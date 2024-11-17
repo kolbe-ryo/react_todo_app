@@ -22,10 +22,12 @@ jobs:
       - run: npm test
 
       # cypressによるテスト
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        with:
-          build: npm run build
-          start: npm start
-          wait-on: "http://localhost:3000"
-          browser: chrome
+      # 秘匿情報が必要なため、E2Eはローカルでのみ実行する
+      # どうしてもやりたい場合はAWS SecretManagerなどを利用してシークレットを取得し、利用すること
+      # - name: Cypress run
+      #   uses: cypress-io/github-action@v6
+      #   with:
+      #     build: npm run build
+      #     start: npm start
+      #     wait-on: "http://localhost:3000"
+      #     browser: chrome
