@@ -1,26 +1,29 @@
-## プロジェクト概要
+## アプリ概要
 ### App 説明
-このプロジェクトは、Supabaseをバックエンドとして使用するReact Todoアプリケーションです。  
+このアプリは、Supabaseをバックエンドとして使用するReact Todoアプリケーションです。  
 ユーザー登録してアプリにログインしてください。  
 ユーザーはTODOタスクを作成、更新、削除することができます。  
 
 URL：https://todo.kolbe-app.site/
 
 ### 機能
-// TODO: スクショ
 | Page | Authentiaction | TopPage |
 |--------|--------|--------|
-| View | Cell | Cell |
+| View | <img width="300" alt="Auth" src="https://github.com/user-attachments/assets/2caf145b-e512-4bd0-9fd6-8e6c01bf8473"> | <img width="500" alt="TopPage" src="https://github.com/user-attachments/assets/8f8b4a81-f606-47bd-8f41-83230bb861c9"> |
 | Description | ログイン・サインアップを行う画面 | TODOアプリを提供する画面 |
 
 #### Authentication
-- Email認証
+- Email認証  
+
+メール認証によりユーザー登録・認証が可能です
 
 #### TopPage
 - 取得：TODO一覧を取得・表示できます
 - 追加：タイトルと説明を入力し、TODOタスクを追加できます
 - 削除：不要になったTODOタスクを削除できます
-- 更新：TODOタスクの内容を変更できます
+- 更新：TODOタスクの内容を変更できます  
+
+Todoカードはステータス別に管理され、ドラッグ&ドロップでステータスを自由に変更することが可能です
 
 ## 使用技術
 ### フロントエンド
@@ -52,6 +55,8 @@ API仕様は以下のディレクトリ内にjson形式で保存されていま�
 [supabase/api-spec.json](supabase/api-spec.json)
 
 ## アーキテクチャ
+Domain層は独立しどの層にも依存しないよう構成。
+また、Inflastructure層の実装はContextによるDIで切り替え可能にしています。
 ![archtecture drawio](https://github.com/user-attachments/assets/c1acef8e-3d19-42d2-883f-5552fe515b1f)
 
 ## ディレクトリ構成

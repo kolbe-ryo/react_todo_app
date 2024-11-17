@@ -3,12 +3,14 @@ import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { todosReducer } from '../../../../../application/state/todo-state';
-import { TodoUsecase } from '../../../../../application/usecase/todo/todo-usecase';
+import { TodoUsecase } from '../../../../../application/usecase/todo-usecase';
 import Status from '../../../../../domain/todo/value-object/status';
 import { TodoContext } from '../../../../../infrastructure/di';
 import { RootState } from '../../../../../redux/store';
 import Droppable from '../../../../components/droppable/droppable';
+import ListView from '../list-view/list-view';
 
 /**
  * ステータスエリアコンポーネント
@@ -22,12 +24,20 @@ import Droppable from '../../../../components/droppable/droppable';
 export const StatusArea = () => {
     const dispatch = useDispatch();
     const usecase = new TodoUsecase(useContext(TodoContext));
+    const navigate = useNavigate();
 
     const todos = useSelector((state: RootState) => state.todos.value);
 
     const fetchTodos = async (): Promise<void> => {
-        const fetchTodos = await usecase.fetchTodos();
-        dispatch(todosReducer(fetchTodos));
+        try {
+            const fetchTodos = await usecase.fetchTodos();
+            dispatch(todosReducer(fetchTodos));
+        } catch (e) {
+            console.error(e);
+            // TODO: 特定のエラークラスを作成して、それだった場合とそれ以外で、処理を変更する。UpdateErrorなど
+            navigate('/error', { state: { message: 'データ取得に失敗しました' } });
+        }
+
     }
 
     const updateStatus = async (id: string, status: Status): Promise<void> => {
@@ -35,8 +45,22 @@ export const StatusArea = () => {
         if (!activeTodo) {
             return;
         };
-        const updateTodos = await usecase.updateTodo(activeTodo);
-        dispatch(todosReducer(updateTodos));
+
+        // ローカル上は更新しておくことでUI上では即時反映される
+        const updatedTodos = todos.map(todo => {
+            return todo.getId() === activeTodo.getId() ? activeTodo : todo;
+        });
+        dispatch(todosReducer(updatedTodos));
+
+        // サーバー上のデータを更新し、失敗していた場合は元に戻る
+        try {
+            const updateTodos = await usecase.updateTodo(activeTodo);
+            dispatch(todosReducer(updateTodos));
+        } catch (e) {
+            console.error(e);
+            // TODO: 特定のエラークラスを作成して、それだった場合とそれ以外で、処理を変更する。UpdateErrorなど
+            navigate('/error', { state: { message: 'ステータス更新に失敗しました' } });
+        }
     }
 
     // useSensorを用いて指定のpx以上動かないとドラッグと判定しないようにする
@@ -67,11 +91,17 @@ export const StatusArea = () => {
     return (
         <DndContext onDragEnd={onDragEnd} sensors={sensors}>
             <Stack direction="row" spacing={1} sx={{ justifyContent: "space-around" }}>
-                <Droppable id={Status.todo} />
+                <Droppable id={Status.todo}>
+                    <ListView status={Status.todo} />
+                </Droppable>
                 <Divider orientation="vertical" flexItem ></Divider>
-                <Droppable id={Status.progress} />
+                <Droppable id={Status.progress}>
+                    <ListView status={Status.progress} />
+                </Droppable>
                 <Divider orientation="vertical" flexItem />
-                <Droppable id={Status.done} />
+                <Droppable id={Status.done}>
+                    <ListView status={Status.done} />
+                </Droppable>
             </Stack>
         </DndContext>
     );

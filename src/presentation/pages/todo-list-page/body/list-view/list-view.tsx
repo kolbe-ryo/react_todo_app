@@ -1,8 +1,9 @@
 import { FC, useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { todosReducer } from "../../../../../application/state/todo-state";
-import { TodoUsecase } from "../../../../../application/usecase/todo/todo-usecase";
+import { TodoUsecase } from "../../../../../application/usecase/todo-usecase";
 import { Todo } from "../../../../../domain/todo/todo";
 import Status, { getStatusColor } from "../../../../../domain/todo/value-object/status";
 import { TodoContext } from "../../../../../infrastructure/di";
@@ -19,6 +20,7 @@ type ListViewProps = {
 export const ListView: FC<ListViewProps> = ({ status }) => {
     const dispatch = useDispatch();
     const usecase = new TodoUsecase(useContext(TodoContext));
+    const navigate = useNavigate();
 
     // statusと一致するtodoのみ抽出する
     const todos = useSelector((state: RootState) => state.todos.value);
@@ -30,9 +32,15 @@ export const ListView: FC<ListViewProps> = ({ status }) => {
 
     // Todo内容の更新Modalに渡すupdate関数
     const updateTodo = async (updatedTodo: Todo): Promise<void> => {
-        const todos = await usecase.updateTodo(updatedTodo);
-        dispatch(todosReducer(todos));
-        setSelectedTodo(null);
+        try {
+            const todos = await usecase.updateTodo(updatedTodo);
+            dispatch(todosReducer(todos));
+        } catch (e) {
+            console.error(e);
+            navigate('/error', { state: { message: 'Todo更新に失敗しました' } });
+        } finally {
+            setSelectedTodo(null);
+        }
     }
 
     return (

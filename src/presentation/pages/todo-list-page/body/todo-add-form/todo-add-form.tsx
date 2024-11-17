@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { todosReducer } from "../../../../../application/state/todo-state";
-import { TodoUsecase } from "../../../../../application/usecase/todo/todo-usecase";
+import { TodoUsecase } from "../../../../../application/usecase/todo-usecase";
 import { Todo } from "../../../../../domain/todo/todo";
 import { TodoContext } from "../../../../../infrastructure/di";
 import styles from "./todo-add-form.module.css";
@@ -9,6 +10,7 @@ import styles from "./todo-add-form.module.css";
 export const TodoAddForm = () => {
     const dispatch = useDispatch();
     const usecase = new TodoUsecase(useContext(TodoContext));
+    const navigate = useNavigate();
 
     // フォーム内容を管理するstate
     const [title, setTitle] = useState("");
@@ -16,10 +18,16 @@ export const TodoAddForm = () => {
 
     const addTodo = async (e: React.FormEvent): Promise<void> => {
         e.preventDefault();
-        const todos = await usecase.addTodo(title, description);
-        dispatch(todosReducer(todos));
-        setTitle("");
-        setDescription("");
+        try {
+            const todos = await usecase.addTodo(title, description);
+            dispatch(todosReducer(todos));
+        } catch (e) {
+            console.error(e);
+            navigate('/error', { state: { message: '追加に失敗しました' } });
+        } finally {
+            setTitle("");
+            setDescription("");
+        }
     };
 
     return (

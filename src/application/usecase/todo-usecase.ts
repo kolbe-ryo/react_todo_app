@@ -1,5 +1,5 @@
-import { Todo } from "../../../domain/todo/todo";
-import { ITodoRepository } from "../../../domain/todo/todo-repository";
+import { Todo } from "../../domain/todo/todo";
+import { ITodoRepository } from "../../domain/todo/todo-repository";
 
 export class TodoUsecase {
 
@@ -14,14 +14,17 @@ export class TodoUsecase {
     }
 
     async updateTodo(todo: Todo): Promise<Todo[]> {
-        return this.todoRepository.update(todo);
+        await this.todoRepository.update(todo);
+        return await this.fetchTodos();
     }
 
     async addTodo(title: string, description: string): Promise<Todo[]> {
-        return this.todoRepository.save(title, description);
+        await this.todoRepository.save(title, description);
+        return await this.fetchTodos();
     }
 
     async removeTodo(id: string): Promise<Todo[]> {
-        return this.todoRepository.delete(id);
+        await this.todoRepository.delete(id);
+        return await this.fetchTodos();
     }
 }

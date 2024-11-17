@@ -6,6 +6,7 @@ import { supabase } from "./infrastructure/remote/client";
 import { Loading } from "./presentation/components/loading/loading";
 import AuthPage from "./presentation/pages/authentication/auth";
 import { SignUpPage } from "./presentation/pages/authentication/signup/signup";
+import ErrorPage from "./presentation/pages/error/error-page";
 import NotFoundPage from "./presentation/pages/not-found/not-found-page";
 import TodoListPage from './presentation/pages/todo-list-page/todo-list-page';
 
@@ -40,6 +41,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<AuthPage />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/error" element={<ErrorPage />} />
           <Route path="/" element={!session ? <AuthPage /> : <TodoListPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

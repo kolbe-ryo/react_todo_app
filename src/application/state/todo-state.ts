@@ -9,11 +9,11 @@ export const todosSlice = createSlice({
   },
   reducers: {
     todosReducer: (state, action: PayloadAction<Todo[]>) => {
-        state.value = [...action.payload];
+      state.value = [...action.payload];
     },
   },
-})
+});
 
-export const { todosReducer } = todosSlice.actions
+export const { todosReducer } = todosSlice.actions;
 
-export default todosSlice.reducer
+export default todosSlice.reducer;

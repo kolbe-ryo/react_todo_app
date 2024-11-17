@@ -10,18 +10,18 @@ export const TodoListPageHeader = () => {
         try {
             const { error } = await supabase.auth.signOut()
             if (error) {
-                // TODO: エラー内容によって処理するか決める
                 throw error;
             }
             navigate('/login');
         } catch {
             alert('エラーが発生しました。');
+            navigate('/');
         }
     };
 
     return (
         <div className={styles.header}>
-            <h1 className={styles.title}>TODO List</h1>
+            <h1 className={styles.title}>TODO</h1>
             <h3 className={styles.subtitle}>タスクを管理するアプリ</h3>
             <TbLogout className={styles.logout} onClick={logout} />
         </div>

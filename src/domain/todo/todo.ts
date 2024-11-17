@@ -42,9 +42,11 @@ export class Todo {
      * @param status - ToDoアイテムのステータス。nullの場合はデフォルトでStatus.todoに設定されます。
      * @param createdAt - ToDoアイテムの作成日時。
      * @param userId - ToDoアイテムを作成したユーザーの識別子。
+     * 
+     * @description
+     * 基本は入力フォーマットで不正値はブロックしているので、コンストラクタでチェックすることはない
      */
     constructor(id: string, title: string, description: string | null, status: Status | null, createdAt: Date, userId: string) {
-        console.log("CREATE TODO:", status);
         this.id = id;
         this.title = title;
         this.description = description ?? "";
@@ -73,10 +75,6 @@ export class Todo {
         return this.createdAt;
     }
 
-    public getUserId(): string | null {
-        return this.userId;
-    }
-
     public updateTitle(title: string): this {
         this.title = title;
         return this;
@@ -92,6 +90,7 @@ export class Todo {
         return this;
     }
 
+    // 最低限1文字以上の文字列であることを保証するための正規表現
     public static titleValidationReg: string = '.*[^s]+.*';
 
 }

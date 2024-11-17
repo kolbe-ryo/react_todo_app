@@ -26,7 +26,6 @@ export class SupabaseTodoRepository implements ITodoRepository {
             .eq('userId', this.authState.getUserId())
             .order('createdAt', { ascending: false });
 
-        // TODO: エラーハンドリング
         if (error) {
             throw error;
         }
@@ -48,7 +47,7 @@ export class SupabaseTodoRepository implements ITodoRepository {
      * @returns {Promise<Todo[]>} 更新後のTodoリストを含むPromise
      * @throws {Error} 更新中にエラーが発生した場合
      */
-    public async update(todo: Todo): Promise<Todo[]> {
+    public async update(todo: Todo): Promise<void> {
         // updateの実装
         console.log("update supabase: ", todo.getStatus());
         const { error } = await supabase
@@ -61,12 +60,9 @@ export class SupabaseTodoRepository implements ITodoRepository {
             })
             .eq('id', todo.getId());
 
-        // TODO: エラーハンドリング
         if (error) {
             throw error;
         }
-
-        return await this.fetchAll();
     }
 
     /**
@@ -78,7 +74,7 @@ export class SupabaseTodoRepository implements ITodoRepository {
      * @returns {Promise<Todo[]>} 全てのTodoリストを含むPromise
      * @throws {Error} 保存中にエラーが発生した場合
      */
-    public async save(title: string, description: string): Promise<Todo[]> {
+    public async save(title: string, description: string): Promise<void> {
         const { error } = await supabase
             .from('todo')
             .insert({
@@ -88,13 +84,9 @@ export class SupabaseTodoRepository implements ITodoRepository {
                 userId: this.authState.getUserId(),
             });
 
-        // TODO: エラーハンドリング
         if (error) {
-            console.log(error);
             throw error;
         }
-
-        return await this.fetchAll();
     }
 
     /**
@@ -104,17 +96,14 @@ export class SupabaseTodoRepository implements ITodoRepository {
      * @returns {Promise<Todo[]>} 削除後の全てのTodoのリストを返します
      * @throws {Error} 削除中にエラーが発生した場合
      */
-    public async delete(id: string): Promise<Todo[]> {
+    public async delete(id: string): Promise<void> {
         const { error } = await supabase
             .from('todo')
             .delete()
             .eq('id', id);
 
-        // TODO: エラーハンドリング
         if (error) {
             throw error;
         }
-
-        return await this.fetchAll();
     }
 }
