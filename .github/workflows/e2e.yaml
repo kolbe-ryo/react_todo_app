@@ -3,6 +3,7 @@ on: pull_request
 
 jobs:
   cypress:
+    name: E2E testing
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the latest commit
